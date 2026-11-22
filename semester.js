@@ -26,6 +26,12 @@
     z.onclick = () => { $(id).click(); z.blur(); }; stage.appendChild(z);
   });
   addEventListener('keydown', e => { if (e.key === 'f' && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) $('full').click(); });
+  // click or tap anywhere on a slide to go on (not on buttons, the live views, or a picture that zooms)
+  stage.addEventListener('click', e => {
+    if (e.target.closest('button, a, iframe, img[data-zoom], .seg, #speaker, #zoom')) return;
+    if (String(getSelection && getSelection())) return;
+    $('next').click();
+  });
 
   // ---- 3D overview: whole system, or the heads on the animal
   const seg = $('approach'), frame = $('overview-frame');
