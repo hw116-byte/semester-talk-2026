@@ -1,0 +1,17 @@
+{
+  "title": "Frontend FPGA Board 8L V3 · 14 layers V13 · schematic V57 · in test frame V3",
+  "revision": "14 layers V13",
+  "sha256": "989ca28232c6410f04f4e5217e9e3f49105e2de869a2a336c8caf6ec7f798436",
+  "defaults": [
+    "F.Cu",
+    "B.Cu"
+  ],
+  "expected": {
+    "copperLayers": 14
+  },
+  "native": "Frontend_14L_V13_Test_Frame_V3.kicad_pcb",
+  "vendor": "../vendor/kicanvas/",
+  "initialPlanes": true,
+  "source_note": "Unmodified copy of the saved test-frame panel (the board inside its frame; the frame is the fab and assembly panel).",
+  "source_relative_to_workspace": "Final Versions/2_Frontend_FPGA_Board_14_Layers_V13_Test_Frame_V3/test_frame_V3/Frontend_14L_V13_Test_Frame_V3.kicad_pcb"
+}

@@ -1,0 +1,18 @@
+{
+  "title": "FPGA-LDO Option A · layout V24 · schematic V43A · in test frame V4",
+  "revision": "V24",
+  "sha256": "8364363a97d7902f494aae63ac38f007a7025689a73776ea9e70aa17073e81ef",
+  "defaults": [
+    "F.Cu",
+    "In4.Cu",
+    "B.Cu"
+  ],
+  "expected": {
+    "copperLayers": 6
+  },
+  "native": "FPGA_LDO_A_V24_Test_Frame_V4.kicad_pcb",
+  "vendor": "../vendor/kicanvas/",
+  "initialPlanes": true,
+  "source_note": "Unmodified copy of the saved test-frame panel (the board inside its frame; the frame is the fab and assembly panel).",
+  "source_relative_to_workspace": "Final Versions/3_FPGA_LDO_Option_A_Layout_V24_Test_Frame_V4/test_frame_V4/FPGA_LDO_A_V24_Test_Frame_V4.kicad_pcb"
+}

@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bonding Steps Today</title><link rel="icon" href="data:,">
+<!-- Deck copy for the 18 Nov 2026 meeting: same 3D model as library/sc512-probe/bonding-steps (V5), regrouped into 10 clean steps,
+     faster autoplay and a wire-bonder counter. The library page (index_library_V5.html here) is unchanged. -->
+<style>
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{display:flex;flex-direction:column;font:15px Arial,Helvetica,sans-serif;color:#172a32;background:#fff}
+#stage{position:relative;flex:1;min-height:260px}canvas{width:100%;height:100%;display:block}
+.lab{position:absolute;transform:translate(-50%,-100%);background:rgba(23,42,50,.88);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;white-space:nowrap;pointer-events:none}
+.lab:after{content:"";position:absolute;left:50%;bottom:-5px;border:5px solid transparent;border-top-color:rgba(23,42,50,.88);border-bottom:0;transform:translateX(-50%)}
+#bonder{position:absolute;left:16px;top:14px;background:#fffffff0;border:1px solid #dde3e5;border-radius:8px;padding:10px 14px;transition:border-color .3s,box-shadow .3s}
+#bonder.on{border-color:#111111;box-shadow:0 0 0 3px #11111133}
+#bonder small{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#53656b;font-weight:600}
+#bonder b{font-size:34px;font-weight:600;color:#111111;letter-spacing:-.5px}
+#bonder b span{font-size:20px;color:#999999}
+#bonder i{display:flex;gap:5px;margin-top:6px}
+#bonder i em{width:14px;height:14px;border-radius:50%;border:2px solid #111111}
+#bonder i em.f{background:#111111}
+.panel{border-top:1px solid #dde3e5;padding:12px 16px 14px;display:flex;align-items:center;gap:18px}
+.txt{flex:1;min-width:0}
+#stitle{font-size:21px;font-weight:600}
+#stitle .n{color:#111111;margin-right:8px}
+#stext{color:#53656b;margin-top:4px;font-size:16px}
+.ctl{display:flex;gap:6px}
+button{font:inherit;cursor:pointer;background:#fff;color:#172a32;border:1px solid #c8d3d6;border-radius:999px;width:40px;height:40px;padding:0}
+button:disabled{opacity:.35;cursor:default}
+#play{background:#111111;color:#fff;border-color:#111111}
+.prog{position:absolute;left:0;right:0;bottom:0;height:4px;background:#edf0ef}.prog div{height:100%;background:#111111;transition:width .4s}
+[hidden]{display:none!important}#loading{position:absolute;inset:0;display:grid;place-items:center;color:#55656b}
+</style>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script></head><body>
+<div id="stage"><canvas id="c" aria-label="Animated 3D steps of bonding the probe to the ASIC today"></canvas>
+ <div id="bonder"><small>Wire bonder used</small><b id="bn">0<span> / 5</span></b><i id="bd"></i></div>
+ <div id="loading">Loading…</div><div class="prog"><div id="pg"></div></div></div>
+<div class="panel"><div class="txt"><div id="stitle"></div><div id="stext"></div></div>
+ <div class="ctl"><button id="back" aria-label="Previous step">◀</button><button id="play" aria-label="Play or pause">❚❚</button><button id="next" aria-label="Next step">▶</button></div></div>
+<script type="module">
+import {THREE,OrbitControls} from './scene.js';
+import {buildSteps} from './steps.js';
+const stage=document.getElementById('stage'),canvas=document.getElementById('c');
+const r=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});r.setPixelRatio(Math.min(devicePixelRatio,1.5));r.toneMapping=THREE.ACESFilmicToneMapping;
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(35,1,.00002,10),ctl=new OrbitControls(cam,canvas);
+scene.add(new THREE.HemisphereLight(0xffffff,0xa6b8c3,2.0));{const es=new THREE.Scene();const sk=new THREE.Mesh(new THREE.SphereGeometry(10,32,16),new THREE.MeshBasicMaterial({side:THREE.BackSide,vertexColors:true}));const pc=sk.geometry.attributes.position,col=[];for(let i=0;i<pc.count;i++){const t=(pc.getY(i)/10+1)/2;col.push(.35+.65*t,.36+.64*t,.38+.62*t);}sk.geometry.setAttribute('color',new THREE.Float32BufferAttribute(col,3));es.add(sk);for(const [x,y,z] of [[5,6,3],[-6,5,-2],[0,7,-6]]){const b=new THREE.Mesh(new THREE.BoxGeometry(3,.2,3),new THREE.MeshBasicMaterial({color:0xffffff}));b.position.set(x,y,z);b.lookAt(0,0,0);es.add(b);}scene.environment=new THREE.PMREMGenerator(r).fromScene(es,.02).texture;}
+for(const p of [[75,120,80],[-45,-90,-60]]){const l=new THREE.DirectionalLight(0xffffff,1.8);l.position.set(...p);scene.add(l);}
+let S,STEPS,cur=0,anim=null,playing=false,holdT=null,labEls=[];
+const iso=(t,d,dir=[.55,.75,.9])=>{const v=new THREE.Vector3(...dir).normalize().multiplyScalar(d);return {t,p:[t[0]+v.x,t[1]+v.y,t[2]+v.z]};};
+function render(){r.render(scene,cam);const {width,height}=stage.getBoundingClientRect();
+ labEls.forEach(([el,p])=>{const v=new THREE.Vector3(...p.map(x=>x/1000)).project(cam);el.style.display=v.z<1&&Math.abs(v.x)<1.1&&Math.abs(v.y)<1.1?'block':'none';el.style.left=((v.x+1)/2*width)+'px';el.style.top=((1-v.y)/2*height)+'px';});}
+ctl.addEventListener('change',()=>{if(!anim)render();});THREE.DefaultLoadingManager.onLoad=()=>render();
+// each clean step runs one or more of the 16 library animation steps
+function apply(k,e){S.reset();for(let i=0;i<k;i++)STEPS[i].runs.forEach(j=>S.run[j](1));STEPS[k].runs.forEach(j=>S.run[j](e));}
+function bonder(k){const n=STEPS.slice(0,k+1).filter(s=>s.bond).length;document.getElementById('bn').firstChild.textContent=n;
+ document.querySelectorAll('#bd em').forEach((x,i)=>x.classList.toggle('f',i<n));document.getElementById('bonder').classList.toggle('on',!!STEPS[k].bond);}
+function setPlay(on){playing=on;clearTimeout(holdT);document.getElementById('play').textContent=on?'❚❚':'▶';
+ if(on&&!anim){cur>=STEPS.length-1?go(0):go(cur+1);}}
+const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+function go(k){clearTimeout(holdT);cur=Math.max(0,Math.min(STEPS.length-1,k));const st=STEPS[cur];
+ document.getElementById('stitle').innerHTML=`<span class="n">${cur+1}</span>${st.title}`;document.getElementById('stext').textContent=st.text;
+ document.getElementById('back').disabled=cur===0;document.getElementById('next').disabled=cur===STEPS.length-1;
+ document.getElementById('pg').style.width=((cur+1)/STEPS.length*100)+'%';bonder(cur);
+ labEls.forEach(([el])=>el.remove());labEls=(st.labels||[]).map(([t,p])=>{const el=document.createElement('div');el.className='lab';el.textContent=t;el.style.display='none';stage.appendChild(el);return [el,p];});
+ const t0=ctl.target.clone(),p0=cam.position.clone(),t1=new THREE.Vector3(...st.cam.t).multiplyScalar(.001),p1=new THREE.Vector3(...st.cam.p).multiplyScalar(.001);
+ const sp=playing?.22:.6,start=performance.now(),camDur=900*sp,dur=st.dur*1000*sp,delay=200*sp,id={};anim=id;
+ const tick=now=>{if(anim!==id)return;const a=Math.min(1,(now-start)/camDur),e=Math.min(1,Math.max(0,(now-start-delay)/dur)),c=ease(a);
+  ctl.target.lerpVectors(t0,t1,c);cam.position.lerpVectors(p0,p1,c);ctl.update();apply(cur,ease(e));render();
+  if(a<1||e<1)requestAnimationFrame(tick);else{anim=null;if(playing)holdT=setTimeout(()=>{cur<STEPS.length-1?go(cur+1):setPlay(false);},st.bond?700:400);}};
+ requestAnimationFrame(tick);}
+function resize(){const {width,height}=stage.getBoundingClientRect();if(width<1||height<1)return;r.setSize(width,height,false);cam.aspect=width/height;cam.updateProjectionMatrix();render();}
+(async()=>{S=await buildSteps();scene.add(S.root);const {EX,EZ,T,DT,az,pzc,SPAN,yP,zE,loopTop}=S.P;
+ const close={t:[100,.87,80.3],p:[102.4,3.0,83.5]};const closeP={t:[EX-SPAN,DT+.02,pzc+.06],p:[EX-SPAN+2.4,DT+2.15,pzc+3.26]};
+ STEPS=[
+  {runs:[0],title:'ASIC glued onto the G-chip board',text:'One ASIC per G-chip board.',dur:1.2,cam:iso([100,.5,82],30)},
+  {runs:[1],bond:1,title:'Wire-bond the ASIC to the board',text:'176 wire bonds.',dur:2.4,cam:iso([101,.8,80],13)},
+  {runs:[2,3,4],title:'Epoxy, enclosure, probe alongside',text:'The probe stays on its wafer piece.',dur:1.8,cam:iso([95,.8,83],38),
+   labels:[['Probe',[EX-SPAN,DT,pzc+6]]]},
+  {runs:[5],bond:1,title:'Ball + tail on every ASIC contact',text:'512 gold balls, each with a standing tail.',dur:2.2,cam:close},
+  {runs:[6],bond:1,title:'Ball + tail on every probe pad',text:'512 more.',dur:2.2,cam:closeP},
+  {runs:[7],title:'Ribbon laid over the tails',text:'Hollow pads drop over the tails at both ends.',dur:1.6,cam:iso([94,.9,82],26),
+   labels:[['Ribbon',[EX-7.5,1.8,az-3.5]]]},
+  {runs:[8],bond:1,title:'Second ball at the ASIC end',text:'512 rivets.',dur:2.2,cam:close},
+  {runs:[9],bond:1,title:'Second ball at the probe end',text:'512 rivets · 1,024 in all.',dur:2.2,cam:closeP},
+  {runs:[10,11,12],title:'Glue, cover, flip the probe over the chip',text:'The ribbon folds; the probe ends up face down over the die.',dur:2.8,cam:iso([95,1.5,82],30,[.15,.35,1])},
+  {runs:[13,14,15],title:'Holder on, shanks freed, wires added',text:'The finished device is ≈3.9 mm tall.',dur:2.6,cam:iso([100,1.6,85],34)},
+ ];
+ const bd=document.getElementById('bd');for(let i=0;i<5;i++)bd.appendChild(document.createElement('em'));
+ const man=k=>{setPlay(false);go(k);};document.getElementById('back').onclick=()=>man(cur-1);document.getElementById('next').onclick=()=>man(cur+1);document.getElementById('play').onclick=()=>setPlay(!playing);
+ addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();man(cur+1);}else if(e.key==='ArrowLeft'){man(cur-1);}else if(e.key==='p'||e.key==='P'){setPlay(!playing);}});
+ new ResizeObserver(resize).observe(stage);resize();
+ const q=new URLSearchParams(location.search),s0=Math.max(0,+(q.get('step')||1)-1);const c=STEPS[s0].cam;ctl.target.set(...c.t.map(x=>x/1000));cam.position.set(...c.p.map(x=>x/1000));
+ playing=q.get('autoplay')==='1';document.getElementById('play').textContent=playing?'❚❚':'▶';
+ go(s0);document.getElementById('loading').hidden=true;document.body.dataset.ready='true';window.__go=go;
+})().catch(e=>{document.getElementById('loading').textContent='Unable to load the 3D model.';console.error(e);});
+</script></body></html>

@@ -1,0 +1,244 @@
+/* Every neuron · deck V2 · one fixed 1600 × 900 stage, scaled to the window. No chrome.
+   Look (22 Nov): warm paper, thin lines, after the Anthropic chart Howard pointed to. */
+:root{--ink:#17120F;--muted:#6B675E;--soft:#A29E92;--line:#D6D3C8;--accent:#0F4D92;--tint:#DDE3E6;--paper:#ECEAE2}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--paper);color:var(--ink);overflow:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+button{font:inherit;cursor:pointer}
+
+#stage{position:fixed;left:50%;top:50%;width:1600px;height:900px;transform:translate(-50%,-50%);transform-origin:50% 50%}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;padding:70px 88px 96px}
+.slide.active{display:flex}
+h1{font-size:46px;font-weight:600;letter-spacing:-.022em;line-height:1.1;margin:0 0 30px}
+.fill{flex:1;min-height:0;display:flex}
+.fill>iframe{flex:1;min-width:0;min-height:0;width:100%;height:100%;display:block}
+.fill>img.plot{flex:1;min-width:0;min-height:0;width:100%;height:100%;object-fit:contain;display:block}
+iframe{border:1px solid var(--line);background:#fff}
+.row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:30px}
+.row h1{margin:0}
+
+/* centred statement slides */
+.mid{flex:1;display:flex;flex-direction:column;justify-content:center}
+.dateline{font-size:26px;color:var(--muted);margin:0 0 26px;line-height:1.4}
+.big{font-size:120px;font-weight:600;letter-spacing:-.035em;line-height:1.02;margin:0}
+.big.fit{font-size:90px}
+.huge{font-size:196px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0;font-variant-numeric:tabular-nums}
+.sub{font-size:40px;color:var(--muted);margin:30px 0 0}
+
+/* cover */
+.cover{justify-content:center}
+.cover h1{font-size:176px;letter-spacing:-.045em;margin:0}
+.who{font-size:32px;color:var(--muted);margin:34px 0 0 6px}
+.cover-art{position:absolute;right:96px;top:36px;height:828px;width:auto}
+.cover h1,.cover .who{position:relative}
+.credit{position:absolute;right:96px;bottom:14px;margin:0;font-size:12px;color:var(--soft)}
+
+/* roadmap */
+.road{flex:1;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);align-content:center;counter-reset:r;position:relative}
+.road::before{content:"";position:absolute;left:14px;right:25%;top:calc(50% - 62px);height:2px;background:var(--ink)}
+.road li{counter-increment:r;position:relative;padding:58px 24px 0 0;display:flex;flex-direction:column;gap:10px}
+.road li::before{content:counter(r);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;transform:translateY(-14px)}
+.road b{font-size:40px;font-weight:600;letter-spacing:-.02em}
+.road span{font-size:24px;color:var(--muted)}
+
+/* segmented buttons */
+.seg{display:inline-flex;flex:none}
+.seg button{background:var(--paper);color:var(--ink);border:1px solid var(--soft);margin-left:-1px;font-size:17px;padding:9px 18px}
+.seg button:first-child{border-radius:6px 0 0 6px;margin-left:0}
+.seg button:last-child{border-radius:0 6px 6px 0}
+.seg button[aria-pressed=true],.seg button[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink);position:relative}
+
+/* panels (KiCad viewer tabs) */
+.panels{position:relative}
+.panel{display:none;flex:1;min-height:0}
+.panel.active{display:flex}
+.panel iframe{flex:1;width:100%;height:100%}
+
+/* picture slides */
+.shots{gap:22px;align-items:stretch}
+.shots figure{flex:1;min-width:0;min-height:0;margin:0;display:flex;flex-direction:column}
+.shots img{flex:1;min-height:0;width:100%;object-fit:contain;cursor:zoom-in}
+.shots.three img{background:#F6F5F0;border:1px solid var(--line)}
+.shots.four img{object-fit:cover;border:1px solid var(--line)}
+.shots figcaption{font-size:20px;color:var(--muted);margin-top:12px}
+.duo{gap:24px}
+.duo figure{flex:1;min-width:0;margin:0;display:flex;flex-direction:column}
+.duo iframe{flex:1;min-height:0;width:100%}
+.duo figcaption{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-size:22px;color:var(--muted)}
+.duo figcaption b{font-size:30px;font-weight:600;color:var(--ink)}
+.foot-note{margin:10px 0 0;font-size:16px;color:var(--soft)}
+
+/* closing path */
+#path{width:100%;height:150px;margin-top:70px;flex:none;display:block}
+
+/* page-turn edges: invisible until the pointer is over them */
+.edge{position:absolute;top:0;bottom:0;width:80px;border:0;background:none;padding:0;z-index:5;opacity:0;transition:opacity .15s}
+.edge.left{left:0}.edge.right{right:0}
+.edge::after{content:"";position:absolute;top:50%;left:50%;width:18px;height:18px;border:solid var(--muted);border-width:3px 3px 0 0;transform:translate(-70%,-50%) rotate(45deg)}
+.edge.left::after{transform:translate(-30%,-50%) rotate(-135deg)}
+.edge:hover,.edge:focus-visible{opacity:1}
+
+/* the only chrome: four thin segments and a page number */
+.foot{display:flex;gap:6px;pointer-events:none}
+.foot i{flex:1;height:3px;background:var(--line)}
+.foot i.on{background:var(--ink)}
+#counter{font-size:14px;color:var(--soft);font-variant-numeric:tabular-nums;pointer-events:none;white-space:nowrap}
+body.is-cover .foot,body.is-cover #counter{visibility:hidden}
+
+/* speaker notes (press n) and picture zoom (click a picture) */
+#speaker{position:fixed;z-index:55;bottom:18px;left:4vw;right:4vw;max-height:36%;overflow:auto;background:#fffffffa;border:1px solid var(--ink);padding:14px 20px;box-shadow:0 8px 28px #0002;font-size:18px;line-height:1.5}
+#speaker p{margin:6px 0 0}
+#zoom{position:fixed;inset:0;z-index:80;background:#111;display:flex;touch-action:none;overflow:hidden}
+#zoom img{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none;user-select:none;cursor:grab}
+#zoom img.drag{cursor:grabbing}
+#zoom .zbar{position:absolute;top:12px;right:12px;display:flex;gap:6px;z-index:2}
+#zoom .zbar button{background:#fff;border:1px solid #fff;border-radius:4px;padding:7px 11px}
+#zoom .zcap{position:absolute;left:16px;bottom:14px;color:#ddd;font-size:15px;z-index:2}
+
+/* full-slide figure shown in steps (the frontier): → reveals the next frame, ← goes back */
+.slide.bleed{padding:0}
+.frames{position:absolute;inset:0}
+.frames img{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .7s ease}
+.frames img.on{opacity:1}
+
+/* a full-slide photographic plate with the words in its empty corner (the closing slide) */
+.slide.plate{background:#000 center/cover no-repeat;color:#fff;padding:96px 88px}
+.slide.plate .mid{justify-content:flex-start}
+.slide.plate .dateline{color:#E9C9A0}
+.slide.plate .big.fit{font-size:72px}
+.slide.plate #path{width:880px;height:93px;margin-top:64px}
+
+/* a build inside a titled slide: the frames fill the plot area */
+.fill.frames{position:relative;inset:auto}
+.fill.frames img{object-fit:contain}
+
+/* the closing slide: words at the top, a band of Cajal's cells along the bottom (the cover has one cell) */
+.slide.closing .mid{justify-content:flex-start;padding-top:40px}
+.slide.closing .big.fit{font-size:84px}
+.slide.closing #path{width:1100px;height:116px;margin-top:56px}
+.slide.closing .band{position:absolute;left:60px;right:60px;bottom:92px;width:1480px;height:auto;opacity:.92}
+.slide.closing .credit{right:88px;bottom:58px}
+
+/* ---- the system, one part per slide (22 Nov): the path on top, a real picture, three questions, the numbers */
+.chain{display:flex;margin:0 0 22px;font-size:15px;color:var(--soft)}
+.chain span,.chain b{padding-right:14px;margin-right:14px;border-right:1px solid var(--line);font-weight:400}
+.chain :last-child{border-right:0}
+.chain b{color:var(--accent);font-weight:600}
+.part h1{margin-bottom:22px}
+.two{gap:60px;align-items:stretch}
+.two figure{flex:1.05;min-width:0;min-height:0;margin:0;display:flex;align-items:center}
+.two figure img{width:100%;height:100%;object-fit:contain;cursor:zoom-in}
+img.onpaper{mix-blend-mode:multiply}
+.q{flex:1;margin:0;display:flex;flex-direction:column;justify-content:center;gap:30px}
+.q dt{font-size:14px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin-bottom:8px}
+.q dd{margin:0;font-size:27px;line-height:1.3;letter-spacing:-.005em}
+.q dd.next{font-weight:600;color:var(--accent)}
+.q dd.hand{font-weight:600;color:#C4694A}
+.nums{margin:20px 0 0;font-size:17px;color:var(--muted);line-height:1.4}
+.pins{width:100%;border-collapse:collapse;font-size:24px}
+.pins td{padding:17px 0;border-top:1px solid var(--line)}
+.pins tr:last-child td{border-bottom:1px solid var(--line)}
+.pins td:first-child{font-weight:600;width:42%}
+.pins td:last-child{color:var(--muted)}
+.stats{align-items:center;gap:40px}
+.stats div{flex:1}
+.stats b{display:block;font-size:104px;font-weight:600;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.stats div:nth-child(2) b{color:var(--soft)}
+.stats span{display:block;margin-top:18px;font-size:24px;color:var(--muted);line-height:1.3}
+/* numbered points */
+.rules{flex:1;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:54px 80px;align-content:center;counter-reset:r}
+.rules li{counter-increment:r;position:relative;padding-left:84px}
+.rules li::before{content:counter(r);position:absolute;left:0;top:-10px;font-size:68px;font-weight:600;line-height:1;color:var(--accent);letter-spacing:-.04em}
+.rules b{display:block;font-size:32px;font-weight:600;letter-spacing:-.015em;margin-bottom:8px}
+.rules span{font-size:21px;line-height:1.38;color:var(--muted)}
+.rules.open{gap:34px 80px}
+.rules.open li::before{color:var(--soft);font-size:54px;top:-4px}
+.rules.open b{font-size:28px}
+/* status table */
+.state{flex:1;width:100%;border-collapse:collapse;font-size:25px;align-self:center}
+.state td{padding:15px 24px 15px 0;border-top:1px solid var(--line);vertical-align:middle}
+.state tr:last-child td{border-bottom:1px solid var(--line)}
+.state td:first-child{font-weight:600;width:36%}
+.state td:nth-child(2){width:20%;font-weight:600;white-space:nowrap}
+.state td:last-child{color:var(--muted);font-size:21px}
+.state .ok{color:#5F7343}.state .go{color:var(--accent)}.state .wait{color:var(--muted)}.state .no{color:#C4694A}
+
+/* slides paint their own paper, so pictures set to multiply blend into it */
+.slide{background:var(--paper)}
+.slide.plate{background:#000 center/cover no-repeat}
+.stats b{font-size:88px;white-space:nowrap}
+.state td.ok,.state td.go,.state td.wait,.state td.no{font-size:25px;font-weight:600}
+.state td.ok{color:#5F7343}.state td.go{color:var(--accent)}.state td.wait{color:var(--muted)}.state td.no{color:#C4694A}
+
+/* ---- after Anthropic's roadshow slides (22 Nov): outlined pastel tiles, paper grain, quieter titles */
+#stage::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:4;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .52  0 0 0 0 .46  0 0 0 .16 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>")}
+.stats{gap:26px}
+.stats div{background:#DDE2CD;border:1.5px solid var(--ink);border-radius:10px;padding:54px 30px 46px;text-align:center}
+.stats div:nth-child(2){background:#E6DFD2}
+.stats div:nth-child(2) b{color:var(--ink)}
+.stats b{font-size:76px}
+.rules:not(.open) li{background:#E6DFD2;border:1.5px solid var(--ink);border-radius:10px;padding:34px 34px 34px 112px}
+.rules:not(.open) li:nth-child(1){background:#F1DDD2}
+.rules:not(.open) li:nth-child(4){background:#DDE2CD}
+.rules:not(.open) li::before{left:32px;top:30px;color:var(--ink)}
+.rules:not(.open){gap:26px}
+.q dd.next{display:inline-block;background:#DDE2CD;border:1.5px solid var(--ink);border-radius:8px;padding:12px 20px;color:var(--ink);font-size:24px}
+
+/* ---- builds of ordinary elements (22 Nov): children of .build[data-steps] arrive one per press */
+.build>*{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.build>.on{opacity:1;transform:none}
+/* part slides, cut down: a title, what it does, a picture, then the decision, then the 32K tile */
+.part h1{margin-bottom:10px}
+.does{margin:0 0 18px;font-size:27px;color:var(--muted)}
+.q.build{gap:38px}
+.q.build>i{display:none}
+.dec{margin:0;font-size:40px;line-height:1.2;font-weight:600;letter-spacing:-.02em}
+.at32{margin:0;align-self:flex-start;background:#DDE2CD;border:1.5px solid var(--ink);border-radius:10px;padding:18px 28px 20px;font-size:31px;font-weight:600;letter-spacing:-.01em}
+.at32 span{display:block;font-size:13px;font-weight:400;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin-bottom:6px}
+/* what carries forward: three columns of tiles */
+.carrywrap{gap:18px;align-items:center}
+.labels,.carry .col{display:grid;grid-template-rows:84px repeat(5,84px);gap:12px}
+.labels{flex:0 0 400px}
+.carry{flex:1;display:flex;gap:18px}
+.carry .col{flex:1}
+.rl{display:flex;flex-direction:column;justify-content:center}
+.rl b{font-size:26px;font-weight:600;letter-spacing:-.01em}
+.rl span{font-size:16px;color:var(--muted);margin-top:3px}
+.rl.hand b{color:#C4694A}
+.col .hd{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:10px}
+.col .hd b{font-size:40px;font-weight:600;letter-spacing:-.03em;line-height:1}
+.col .hd span{font-size:15px;color:var(--muted);margin-top:6px}
+.cell{display:flex;align-items:center;justify-content:center;border:1.5px solid var(--ink);border-radius:10px;font-size:22px;font-weight:600}
+.cell.new{background:#DCE5EA}.cell.same{background:#DDE2CD}.cell.hand{background:#F1DDD2;color:#A5512F}
+.cell.none{border:1.5px dashed var(--line);background:none}
+.nums .k{display:inline-block;width:16px;height:16px;border:1.5px solid var(--ink);border-radius:4px;vertical-align:-2px;margin:0 8px 0 22px}
+.nums .k:first-child{margin-left:0}
+.k.new{background:#DCE5EA}.k.same{background:#DDE2CD}.k.hand{background:#F1DDD2}
+
+/* ---- the cover (22 Nov): the 2019 question on plain paper; one press adds "In the age of AI." and the slide turns dark */
+.cover.ask{transition:background .7s ease,color .7s ease}
+.cover.ask h1{font-size:66px;line-height:1.1;letter-spacing:-.03em;max-width:800px;margin:0;font-weight:600}
+.cover.ask .build>*{transform:none}
+.cover.ask .age{margin:26px 0 0;font-size:66px;line-height:1.1;font-weight:600;letter-spacing:-.03em;color:#E2AE98}
+.cover.ask .fly{position:absolute;right:56px;top:258px;width:690px;height:auto}
+.cover.ask .credit{right:56px;bottom:20px;color:#8d877b}
+.cover.ask .who{margin-top:44px}
+.cover.ask .src{position:absolute;left:88px;bottom:40px;margin:0;font-size:15px;color:var(--soft)}
+.cover.ask:has(.ai.on){background:#17120F;color:#F3F0E8}
+.cover.ask:has(.ai.on) .who{color:#b9b3a6}
+.cover.ask:has(.ai.on) .src{color:#6f6a60}
+
+.cover.ask .lit{position:absolute;right:110px;top:30px;height:840px;width:auto}
+
+/* ---- 22 Nov, Howard's review: names arrive with the second line of the cover; three principles; a draft marker */
+.cover.ask .ai .who{margin:40px 0 0 4px;color:#b9b3a6}
+.placeholder{color:var(--soft);font-style:italic}
+.rules.three{grid-template-columns:1fr 1fr 1fr;gap:26px}
+.rules.three li{padding:150px 34px 44px 34px !important;min-height:400px}
+.rules.three li::before{left:34px !important;top:40px !important;font-size:84px !important}
+.rules.three b{font-size:36px;line-height:1.12;margin-bottom:16px}
+.rules.three span{font-size:23px}
+.rules.three li:nth-child(1){background:#F1DDD2}.rules.three li:nth-child(2){background:#E6DFD2}.rules.three li:nth-child(3){background:#DDE2CD}
+.slide.draft::before{content:"draft · mostly AI-generated";position:absolute;right:88px;top:30px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}

@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bonding 3D View</title><link rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{display:flex;flex-direction:column;font:13px -apple-system,system-ui,sans-serif;color:#172a32;background:#fff}
+.bar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px;border-bottom:1px solid #dde3e5}
+button{font:inherit;cursor:pointer;background:#fff;color:#172a32;border:1px solid #c8d3d6;border-radius:999px;padding:5px 12px}button[aria-pressed=true]{background:#126a71;color:#fff;border-color:#126a71}
+.sep{width:1px;height:20px;background:#dde3e5;margin:0 4px}
+#stage{position:relative;flex:1;min-height:320px}canvas{width:100%;height:100%;display:block}
+.lab{position:absolute;transform:translate(-50%,-100%);background:rgba(23,42,50,.88);color:#fff;padding:3px 7px;border-radius:5px;font-size:12px;max-width:240px;pointer-events:none;white-space:normal}
+.lab:after{content:"";position:absolute;left:50%;bottom:-5px;border:5px solid transparent;border-top-color:rgba(23,42,50,.88);border-bottom:0;transform:translateX(-50%)}
+.cap{padding:6px 10px;border-top:1px solid #dde3e5;color:#55656b;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+[hidden]{display:none!important}.clean .bar,.clean .cap{display:none!important}#loading{position:absolute;inset:0;display:grid;place-items:center;color:#55656b}
+</style>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script></head><body>
+<div class="bar"><strong id="ttl">ASIC top board</strong><span class="sep"></span>
+<button data-mode="direct" aria-pressed="true">New board · Direct</button><button data-mode="today" aria-pressed="false">New board · Ribbon</button><button data-mode="current" aria-pressed="false">Current 512 · as bonded</button><button data-mode="encl" aria-pressed="false">Current 512 · in enclosure</button><span class="sep"></span>
+<button data-view="iso">Isometric</button><button data-view="top">Top</button><button data-view="side">Side</button><button data-view="rivet">Close-up: rivets</button><button data-view="wire">Close-up: wire bonds</button><button data-epoxy>Epoxy</button><button data-lab>Labels</button><span class="sep"></span><a hidden href="steps.html" style="color:#126a71;font-weight:600;text-decoration:none">Bonding steps ▶</a></div>
+<div id="stage"><canvas id="c" aria-label="Interactive 3D model of the ASIC top board with probes"></canvas><div id="loading">Loading board…</div></div>
+<div class="cap"><span>Drag to rotate · scroll to zoom · right-drag to pan</span><span id="det"></span></div>
+<script type="module">
+import {build,loadBoard,THREE,OrbitControls} from './scene.js';
+const stage=document.getElementById('stage'),canvas=document.getElementById('c'),det=document.getElementById('det');
+const DET={direct:'New ASIC board (V8). To scale: chip (die photo), 176 wire bonds per chip, probe and its 512 rivets from the layout. The probe must come off its wafer first. Assumed: die 0.35 mm, flex 20 µm, loop 170 µm, epoxy shape.',
+ today:'New ASIC board (V8) with today\'s ribbon. To scale: ribbon (R5 layout), probe on its wafer and every rivet, as bonded, before the flip. Assumed: ribbon arch and route, wafer 0.5 mm, epoxy shape.',
+ current:'Current 512 device as bonded: G-chip outline, die position and ribbon-to-probe offset from the layouts and fixture V10. Ribbon to the left (the lab confirmed), drawn face down to match the enclosure view. Finger layout copied from the V8 footprint. Epoxy as in the G-chip photo.',
+ encl:'G-chip in the EBL512 enclosure V3 (holder see-through). Board fit from the G-chip photo widths and the STEP. After the flip, probe and ribbon under the holder (the lab): probe face down in the 3.8 mm underside channel with its wafer etched away (nickel etch, the lab), ribbon to the left (confirmed). Assumed: probe height in the channel, ribbon face down, loop shape, epoxy height.'};
+const r=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});r.setPixelRatio(Math.min(devicePixelRatio,1.5));r.toneMapping=THREE.ACESFilmicToneMapping;
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(35,1,.00002,10),ctl=new OrbitControls(cam,canvas);
+scene.add(new THREE.HemisphereLight(0xffffff,0xa6b8c3,2.0));{const es=new THREE.Scene();const sk=new THREE.Mesh(new THREE.SphereGeometry(10,32,16),new THREE.MeshBasicMaterial({side:THREE.BackSide,vertexColors:true}));const pc=sk.geometry.attributes.position,col=[];for(let i=0;i<pc.count;i++){const t=(pc.getY(i)/10+1)/2;col.push(.35+.65*t,.36+.64*t,.38+.62*t);}sk.geometry.setAttribute('color',new THREE.Float32BufferAttribute(col,3));es.add(sk);for(const [x,y,z] of [[5,6,3],[-6,5,-2],[0,7,-6]]){const b=new THREE.Mesh(new THREE.BoxGeometry(3,.2,3),new THREE.MeshBasicMaterial({color:0xffffff}));b.position.set(x,y,z);b.lookAt(0,0,0);es.add(b);}scene.environment=new THREE.PMREMGenerator(r).fromScene(es,.02).texture;}for(const p of [[75,120,80],[-45,-90,-60]]){const l=new THREE.DirectionalLight(0xffffff,1.8);l.position.set(...p);scene.add(l);}
+let mode=['today','current','encl'].includes(new URLSearchParams(location.search).get('mode'))?new URLSearchParams(location.search).get('mode'):'direct',view='iso',showLab=true,showEpo=true,parts,labEls=[],board;
+const Q=new URLSearchParams(location.search);if(Q.get('clean')){document.body.classList.add('clean');showLab=false;}if(Q.get('epoxy')==='0')showEpo=false;
+function render(){r.render(scene,cam);placeLabels();}
+ctl.addEventListener("change",render);window.__view=(t,p)=>{ctl.target.set(...t);cam.position.set(...p);ctl.update();render();};THREE.DefaultLoadingManager.onLoad=()=>render();
+function placeLabels(){const {width,height}=stage.getBoundingClientRect();
+ labEls.forEach(([el,p])=>{const v=new THREE.Vector3(...p.map(x=>x/1000)).project(cam);el.style.display=showLab&&v.z<1?'block':'none';el.style.left=((v.x+1)/2*width)+'px';el.style.top=((1-v.y)/2*height)+'px';});}
+function setLabels(){labEls.forEach(([el])=>el.remove());labEls=parts.labels[mode].map(([t,p])=>{const el=document.createElement('div');el.className='lab';el.textContent=t;stage.appendChild(el);return [el,p];});}
+const CLOSE={encl:{rivet:[[.1035,.00178,.0823],[.1075,.0012,.0870]],wire:[[.1056,.0009,.0812],[.1095,.0030,.0835]]},current:{rivet:[[.0600,.00087,.0802],[.0617,.0021,.0824]],wire:[[.0545,.0006,.0812],[.0549,.0008,.0840]]},direct:{rivet:[[.1301,.00116,.0826],[.1318,.0024,.0848]],wire:[[.1359,.0010,.0784],[.1372,.0028,.0812]]},today:{rivet:[[.1301,.00116,.0826],[.1318,.0024,.0848]],wire:[[.1258,.00115,.0830],[.1262,.00135,.0858]]}};
+const CENS={encl:new THREE.Vector3(.0995,.0017,.0835),direct:new THREE.Vector3(.1353,.001,.0835),today:new THREE.Vector3(.1353,.001,.081),current:new THREE.Vector3(.058,.001,.083)},DIST={direct:.036,today:.07,current:.06,encl:.042},VIEWS={iso:[.55,.75,.9],top:[0,1,.0001],side:[1,.18,.0001]};
+function fit(v){view=v;if(CLOSE[mode][v]){const [t,p]=CLOSE[mode][v];ctl.target.set(...t);cam.position.set(...p);ctl.update();document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===v)));render();return;}const C=CENS[mode];const d=new THREE.Vector3(...VIEWS[v]).normalize().multiplyScalar(DIST[mode]);ctl.target.copy(C);cam.position.copy(C).add(d);ctl.update();
+ document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===v)));render();}
+function vis(){const m=mode;board.visible=parts.v8.visible=!['current','encl'].includes(m);parts.encl.visible=m==='encl';parts.direct.visible=m==='direct';parts.today.visible=m==='today';parts.current.visible=m==='current';for(const k in parts.epo)parts.epo[k].visible=showEpo&&k===m;}
+function setMode(m){mode=m;vis();det.textContent=DET[m];document.getElementById('ttl').textContent=m==='current'||m==='encl'?'Current 512 device':'New ASIC board (V8)';
+ document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===m)));setLabels();if(parts.ready)fit(view);else render();}
+function resize(){const {width,height}=stage.getBoundingClientRect();if(width<1||height<1)return;r.setSize(width,height,false);cam.aspect=width/height;cam.updateProjectionMatrix();render();}
+(async()=>{board=await loadBoard();board.scale.setScalar(1);scene.add(board);
+ parts=await build();[parts.v8,parts.direct,parts.today,parts.current,parts.encl,...Object.entries(parts.epo).filter(([k])=>k!=='encl').map(([,g])=>g)].forEach(g=>scene.add(g));
+ document.querySelector('[data-epoxy]').onclick=e=>{showEpo=!showEpo;e.target.setAttribute('aria-pressed',String(showEpo));vis();render();};document.querySelector('[data-epoxy]').setAttribute('aria-pressed','true');
+ document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+ document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>fit(b.dataset.view));
+ document.querySelector('[data-lab]').onclick=e=>{showLab=!showLab;e.target.setAttribute('aria-pressed',String(showLab));render();};
+ document.querySelector('[data-lab]').setAttribute('aria-pressed','true');
+ new ResizeObserver(resize).observe(stage);resize();setMode(mode);parts.ready=true;fit(Q.get('view')||'iso');document.getElementById('loading').hidden=true;document.body.dataset.ready='true';
+})().catch(e=>{document.getElementById('loading').textContent='Unable to load the 3D model.';console.error(e);});
+</script></body></html>

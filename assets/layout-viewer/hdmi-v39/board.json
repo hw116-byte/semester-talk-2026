@@ -1,0 +1,17 @@
+{
+  "title": "HDMI Extension Board V39",
+  "revision": "V39",
+  "sha256": "e91dc46dd1f1379e81326a002976a02f9042b984b5741fa34c7833ca85bd6c60",
+  "defaults": [
+    "F.Cu",
+    "B.Cu"
+  ],
+  "expected": {
+    "copperLayers": 6
+  },
+  "native": "HDMI_Extension_Board_V39.kicad_pcb",
+  "vendor": "../vendor/kicanvas/",
+  "initialPlanes": true,
+  "source_note": "Unmodified copy of the saved native board.",
+  "source_relative_to_workspace": "2026-11-18_FPGA_Work/05_HDMI_Extension_Board_V39_Test_Pads/project/HDMI_Extension_Board_V39.kicad_pcb"
+}
