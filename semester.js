@@ -26,12 +26,19 @@
     z.onclick = () => { $(id).click(); z.blur(); }; stage.appendChild(z);
   });
   addEventListener('keydown', e => { if (e.key === 'f' && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) $('full').click(); });
-  // click or tap anywhere on a slide to go on (not on buttons, the live views, or a picture that zooms)
-  stage.addEventListener('click', e => {
+  // click or tap anywhere in the window to go on (not on buttons, the live views, or a picture that zooms)
+  document.addEventListener('click', e => {
     if (e.target.closest('button, a, iframe, img[data-zoom], .seg, #speaker, #zoom')) return;
     if (String(getSelection && getSelection())) return;
     $('next').click();
   });
+  // two small buttons that are always there, for the slides a live view fills (a click on a live view belongs to the view)
+  const nav = document.createElement('div'); nav.className = 'nav';
+  [['prev', '‹', 'Previous'], ['next', '›', 'Next']].forEach(([id, sign, label]) => {
+    const b = document.createElement('button'); b.textContent = sign; b.setAttribute('aria-label', label);
+    b.onclick = () => { $(id).click(); b.blur(); }; nav.appendChild(b);
+  });
+  stage.appendChild(nav);
 
   // ---- 3D overview: whole system, or the heads on the animal
   const seg = $('approach'), frame = $('overview-frame');

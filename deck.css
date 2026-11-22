@@ -242,3 +242,8 @@ img.onpaper{mix-blend-mode:multiply}
 .rules.three span{font-size:23px}
 .rules.three li:nth-child(1){background:#F1DDD2}.rules.three li:nth-child(2){background:#E6DFD2}.rules.three li:nth-child(3){background:#DDE2CD}
 .slide.draft::before{content:"draft · mostly AI-generated";position:absolute;right:88px;top:30px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+
+/* always-visible page buttons, bottom right (22 Nov): the only way on from a slide that a live view fills */
+.nav{position:absolute;right:84px;bottom:56px;display:flex;gap:8px;z-index:6}
+.nav button{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);font-size:24px;line-height:1;padding:0 0 3px;opacity:.55;transition:opacity .15s}
+.nav button:hover{opacity:1}
