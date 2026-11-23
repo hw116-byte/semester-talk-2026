@@ -315,3 +315,5 @@ img.onpaper{mix-blend-mode:multiply}
 .rm .c.no{visibility:hidden}
 .rm .rows.build{display:flex;flex-direction:column}
 .rm .rows .row:last-child{border-bottom:1px solid var(--line)}
+/* tiles whose heading is words, not a number (the lunch proposal): the numeral stays small above */
+.rules.three li b{min-height:1.12em}

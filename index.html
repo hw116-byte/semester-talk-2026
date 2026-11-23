@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Every neuron</title>
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="deck.css?v=30">
+<link rel="stylesheet" href="deck.css?v=31">
 <script defer src="app.js?v=2"></script>
 <script defer src="semester.js?v=11"></script>
 </head>
@@ -375,7 +375,17 @@
   </ol>
 </section>
 
-<!-- 33 · Close -->
+<!-- 33 · A proposal: a monthly AI lunch -->
+<section class="slide" data-sec="4" data-notes="One proposal for the lab before I close. We all use AI now, a great deal, and each of us uses it differently. The work we hand each other has a lot of AI in it. But we almost never talk about how we use it. I think we would all gain from sharing that. So I propose a lunch, once a month, where we simply tell each other how we use it in our daily work: what worked, what did not, what we would not trust it with. And whenever a new model comes out, we meet and ask one question: what should it change in how we build our system? I would like to hear how each of you wants to use these tools.">
+  <h1>A proposal: a monthly AI lunch</h1>
+  <ol class="rules three build" data-steps>
+    <li class="on"><b>Why</b><span>We all use AI, a lot, and each of us differently. We almost never talk about it.</span></li>
+    <li><b>What</b><span>Once a month, over lunch: how each of us uses it in daily work. What worked, and what did not.</span></li>
+    <li><b>And when a new model comes out</b><span>We meet and ask one question: what should it change in how we build our system?</span></li>
+  </ol>
+</section>
+
+<!-- 34 · Close -->
 <section class="slide draft closing" data-sec="4" data-notes="So, back to the question from the start. From one head to every neuron is eight steps of times eight. At the pace of history they take two centuries. They only fit in our lifetimes if each one is faster than the last, and that means two things for how we work: build every generation so the next one can reuse it, and go after the slowest loop, which today is the one done by hand. 4K to 32K is the first step, and it is designed. Thank you.">
   <div class="mid">
     <p class="dateline">From one head to every neuron</p>
@@ -386,7 +396,7 @@
   <p class="credit">Drawing: Santiago Ramón y Cajal · scan: Wellcome Collection, CC BY 4.0</p>
 </section>
 
-<!-- 34 · Backup divider -->
+<!-- 35 · Backup divider -->
 <section class="slide" data-backup-start data-sec="0" data-notes="End of the talk. Everything after this slide is backup: the slides from the earlier, longer version, kept for questions.">
   <div class="mid">
     <p class="dateline">End of the talk</p>
@@ -394,7 +404,7 @@
   </div>
 </section>
 
-<!-- 35 · Roadmap (backup) -->
+<!-- 36 · Roadmap (backup) -->
 <section class="slide" data-sec="0" data-notes="The roadmap. First the goal: what neural engineering is trying to do, stated as a number, and why it matters beyond medicine. Second, what it takes: how far along we are, and the list of problems a 2019 paper says must be solved. Third the 4K system, what we built this semester. Fourth, going faster with AI: that 2019 list again, sorted by what AI can see and what it cannot.">
   <h1>Roadmap</h1>
   <ol class="road">
@@ -405,7 +415,7 @@
   </ol>
 </section>
 
-<!-- 36 · The elephant (backup) -->
+<!-- 37 · The elephant (backup) -->
 <section class="slide" data-sec="0" data-notes="Before the goal, the elephant in the room. On 20 November a mathematician working with an AI model posted a proof of the Riemann hypothesis, written in the Lean proof language. It compiles, and the proof checker accepts it. Experts are still confirming that the formal statement really is the Riemann hypothesis. So: claimed and machine-checked, not yet accepted. Either way, the question for us is the same. If a machine can do that, what is left for people trying to move a field forward? Hold the question. The last part of the talk is my answer.">
   <div class="mid">
     <p class="dateline">20 Nov 2026 · An AI-written proof of the Riemann hypothesis is posted. It compiles. Experts are checking it.</p>
@@ -413,78 +423,78 @@
   </div>
 </section>
 
-<!-- 37 · The unit (backup) -->
+<!-- 38 · The unit (backup) -->
 <section class="slide" data-sec="0" data-notes="What are we trying to solve. You can study the brain at three levels. Behaviour: one person, seen from the outside; that is psychology. Regions: imaging like fMRI, where each point averages about a million neurons. And cells: one neuron, one spike. We want the cellular level. That is what makes it neuroscience.">
   <h1>The unit is the neuron</h1>
   <div class="fill"><img class="plot" src="assets/plots/levels.svg?v=9" alt="Three levels: behaviour, one person; regions, about a million neurons per point; cells, one neuron"></div>
 </section>
 
-<!-- 38 · The 2019 paper (backup) -->
+<!-- 39 · The 2019 paper (backup) -->
 <section class="slide" data-sec="0" data-notes="We are not the first to ask. In 2019 eight people, among them Lan Luan and Chong Xie, asked in Neuron whether one can record spikes from every neuron in a mammalian brain. Their answer: physics allows it, for the cortex of a mouse. This is their design, seen from above and drawn to scale. Each blue dot is a shank six micrometres across, one every forty micrometres, and each shank hears the neurons within twenty micrometres of it. A shank carries 280 electrodes. That is twenty million channels for one mouse cortex, and it displaces about two percent of the tissue. For scale, the red outline is one Neuropixels shank today. Two things they did not cover: the human brain, and stimulation. And they wrote it before AI could help. Keep that in mind.">
   <h1>2019: can we record from every neuron? Physics says yes.</h1>
   <div class="fill"><img class="plot" src="assets/plots/design2019.svg?v=8" alt="The 2019 design seen from above, to scale: shanks 6 micrometres across on a lattice 40 micrometres apart among the neurons, with one Neuropixels shank for comparison. 40 micrometres between shanks, 280 electrodes on each shank, 20 million channels for one mouse cortex, 2 percent of the tissue displaced."></div>
   <p class="foot-note">Kleinfeld, Luan, Mitra, Robinson, Sarpeshkar, Shepard, Xie, Harris · Neuron 103, 1005 (2019) · mouse cortex, recording only · neuron bodies drawn 10 µm across for illustration</p>
 </section>
 
-<!-- 39 · Subfield (backup) -->
+<!-- 40 · Subfield (backup) -->
 <section class="slide" data-sec="0" data-notes="This is why I say neuroscience is a subfield of neuroengineering, and not the other way round. Once we can record and stimulate every neuron, any experiment is a click of a button: choose which neurons to read, which to write, and when. All of neuroscience becomes a choice inside that capability. So the engineering problem contains the science.">
   <h1>Neuroscience is a subfield of neuroengineering</h1>
   <div class="fill"><img class="plot" src="assets/plots/subfield.svg?v=9" alt="A large circle, neuroengineering: read and write every neuron. Inside it a smaller circle, neuroscience: choose which ones and when. Then every experiment is a click."></div>
 </section>
 
-<!-- 40 · Who is it for (backup) -->
+<!-- 41 · Who is it for (backup) -->
 <section class="slide" data-sec="0" data-notes="Why does this matter outside the clinic? Today a brain interface means medicine, and that is the right place to start. Each dot here is eight million people. The red dots are everyone living with a spinal cord injury, about 15 million, and everyone who is blind, about 43 million: the people today's implants are built for first. Other conditions add more dots, but the picture does not change. The grey dots are everyone else. An interface that reads and writes every neuron is not only a treatment. It is for all of these dots.">
   <h1>Beyond medicine: who is it for?</h1>
   <div class="fill"><img class="plot" src="assets/plots/people.svg?v=7" alt="One thousand dots, each 8 million people. Seven are red: spinal cord injury and blindness, 58 million people. All one thousand: everyone, 8.2 billion."></div>
   <p class="foot-note">Spinal cord injury: 15.4 million (WHO, 2021) · blindness: 43 million (Bourne et al., Lancet Global Health, 2020) · world population: 8.2 billion</p>
 </section>
 
-<!-- 41 · Ten bits per second (backup) -->
+<!-- 42 · Ten bits per second (backup) -->
 <section class="slide" data-sec="0" data-notes="And this is what everyone is missing. Our senses gather about a billion bits every second. Everything we put out, typing, speaking, moving, runs at about ten bits per second. That is a factor of a hundred million, and it is the same for every healthy person: it is the speed limit on how we work with each other and with machines. The blue bar is one of our 4K heads: 1.5 billion bits per second of raw data, measured directly from the brain. Raw samples are not the same thing as information, so this is capacity, not meaning. But the wire is already wide enough. What is missing is the neurons on the other end of it.">
   <h1>We take in a billion bits a second. We put out ten.</h1>
   <div class="fill"><img class="plot" src="assets/plots/bits.svg?v=8" alt="Information rate on a logarithmic scale. In, what the senses gather: 1 billion bits per second. Out, typing, speaking, moving: 10 bits per second, a gap of one hundred million times. One 4K head, raw data: 1.5 billion bits per second."></div>
   <p class="foot-note">In and out: Zheng and Meister, Neuron, 2025 · one head: 4,096 channels at 31.25 kS/s, 12 bit</p>
 </section>
 
-<!-- 42 · Ceilings (backup) -->
+<!-- 43 · Ceilings (backup) -->
 <section class="slide" data-sec="0" data-notes="That straight line is not one technology. Each kind of probe climbs and then runs out. Stiff arrays as they are today first: the Utah array with 96 channels, then Neuropixels with 384 per probe; with several probes together they reached about two thousand channels, because thick shanks damage tissue when they are packed closely. Flexible threads are our work, the NET probes: we are at 4K, 32K is next, and my estimate is they run out around a hundred thousand channels. Beyond that we need a new kind of probe. The 2019 paper drew one: twenty million channels for a mouse cortex. Nobody has built it, and I do not know yet how it will be made. But there has been a next one every time, and there will be again. These ceilings are our estimates.">
   <h1>Each probe technology has a ceiling</h1>
   <div class="fill"><img class="plot" src="assets/plots/ceilings.svg?v=11" alt="Three S-curves on a logarithmic scale: stiff arrays today (Utah array 96, Neuropixels 384) level off near 2,000 channels, flexible threads (NET probes, our work) near 100,000, and a next probe, drawn in 2019 at 20 million channels and not built, reaches 86 billion"></div>
 </section>
 
-<!-- 43 · The 2019 list (backup) -->
+<!-- 44 · The 2019 list (backup) -->
 <section class="slide" data-sec="0" data-notes="The same paper wrote down what has to be solved. Eight things. Probes: six-micrometre shanks with wires 35 nanometres wide. Power: 0.2 microwatts per channel. Data: find the spikes at the probe, before sending anything. Spike sorting, for twenty million channels. Insertion: a shank every forty micrometres, a tenth of the spacing of a Utah array. Assembly: electronics at the head of every shank. Tissue: nobody knows whether cortex tolerates losing two percent of its volume. And lifetime: electrode coatings degrade over months. I will take two of them now, data and power, and come back to the whole list at the end.">
   <h1>The 2019 list: what must be solved</h1>
   <div class="fill"><img class="plot" src="assets/plots/list2019.svg?v=7" alt="Eight problems from the 2019 paper: probes, power, data, spike sorting, insertion, assembly, tissue, lifetime. Written before AI could help."></div>
 </section>
 
-<!-- 44 · Bandwidth (backup) -->
+<!-- 45 · Bandwidth (backup) -->
 <section class="slide" data-sec="0" data-notes="Can the data even be carried? Each channel is 31.25 kilosamples per second at 12 bits. One head is 192 megabytes per second. Every neuron in a human brain, raw, is about 4 petabytes per second. Compare that with the GPU NVIDIA is shipping now, the Rubin: the chip that trains and runs the large AI models, sold 72 to a rack. Its memory bandwidth, how fast it reads its own 288 gigabytes of memory, is 19.2 terabytes per second: raw, every neuron is about 210 of those, three racks. If the chip sends only spikes, it is about 2 terabytes per second, a tenth of one GPU. So bandwidth is not what stops us. The probes are.">
   <h1>Can we carry the data?</h1>
   <div class="fill"><img class="plot" src="assets/plots/bandwidth.svg?v=9" alt="Data rates on a logarithmic scale, from one channel at 47 kB/s to every neuron raw at 4 PB/s, against one NVIDIA Rubin GPU at 19.2 TB/s and one Vera Rubin rack of 72 GPUs at 1.4 PB/s"></div>
   <p class="foot-note">31.25 kS/s, 12 bit per channel · spikes only: 5 spikes/s per neuron, 5 bytes each · NVIDIA Rubin (2026): 288 GB of HBM4 memory per GPU; NVIDIA lists 19.2 or 22 TB/s, the lower is used</p>
 </section>
 
-<!-- 45 · Twenty watts (backup) -->
+<!-- 46 · Twenty watts (backup) -->
 <section class="slide" data-sec="0" data-notes="Power is the hard one, and it splits in two. Computing, on the left. The brain runs on about 20 watts. A Raspberry Pi 5, an 80 dollar computer, runs Gemma 3 with one billion parameters, a small language model from Google, at ten to fifteen words a second on about 9 watts. So a useful AI model already fits inside the brain's power budget; it does not need the 2,000 watt GPU, and that 2,000 is from industry reports, not from NVIDIA. Recording, on the right. The brain spends about a quarter of a nanowatt per neuron: 20 watts over 86 billion. The 2019 paper needs less than 0.2 microwatts per channel, so that the electronics do not heat the brain. That is already about 900 times the brain's own figure. And the amplifier the paper cites is at 7.6 microwatts, 38 times too much. So computing fits in 20 watts. Recording does not yet.">
   <h1>20 watts is enough to compute. Not yet to record.</h1>
   <div class="fill"><img class="plot" src="assets/plots/power.svg?v=10" alt="Two bar charts on logarithmic scales. Computing, the whole system: Raspberry Pi 5 running Gemma 3 at 9 watts, the human brain at 20 watts, one NVIDIA Rubin GPU at 2,000 watts. Recording, each neuron or channel: the brain at 0.23 nanowatts per neuron, the 2019 target of 0.2 microwatts per channel, about 900 times more, and a published amplifier at 7.6 microwatts per channel, 38 times more again."></div>
   <p class="foot-note">Brain: about 20% of a 100 W resting body, and 20 W ÷ 86 billion per neuron · Raspberry Pi 5: 8 to 10 W, published benchmarks · Rubin GPU: 1,800 to 2,300 W, as reported · target and amplifier: Kleinfeld et al., Neuron 2019</p>
 </section>
 
-<!-- 46 · Sound (backup) -->
+<!-- 47 · Sound (backup) -->
 <section class="slide" data-sec="0" data-notes="The first experiment the chip is headed for: tone pips to a sedated sheep, recording auditory cortex. To trust that, you have to trust the sound. The delay from playback to microphone is 38.3 milliseconds and stays within about a hundredth of a millisecond. Bench only so far; not yet on an animal.">
   <h1>First experiment: sound timing, 38.3 ms</h1>
   <div class="fill shots"><figure><img data-zoom src="assets/sonic/timing_summary.png" alt="Sound delay over 20 probes in two runs: 38.250 ms and 38.375 ms, flat"></figure></div>
 </section>
 
-<!-- 47 · Two kinds of problems (backup) -->
+<!-- 48 · Two kinds of problems (backup) -->
 <section class="slide" data-sec="0" data-notes="Now, going faster. There are two kinds of problems today. The first kind AI has changed completely. I can work with AI for two hours and have a working prototype that would have taken a full PhD, five years, not long ago. The second kind has not moved at all. Wire bonding: there is not much intelligence in it, not much thinking. But it is hard. It took me a long time, it took Weinan a long time, it took Pablo a long time, I consulted the manufacturer's engineer, and it is still not fully solved. Two months, and still two months. The frontier is jagged, and everyone has to face that.">
   <h1>Two kinds of problems</h1>
   <div class="fill"><img class="plot" src="assets/plots/jagged.svg?v=8" alt="Time to solve, before and with AI. A working prototype: five years to two hours. Wire bonding: two months, still two months."></div>
 </section>
 
-<!-- 48 · The bonder (backup) -->
+<!-- 49 · The bonder (backup) -->
 <section class="slide" data-sec="0" data-notes="This is the second kind. Small balls, crushed wire ends, no ball at all. Each failure has more than one cause, and you find them by hand, one at a time, at the machine. Click to zoom.">
   <h1>Not much thinking. Still two months.</h1>
   <div class="fill shots four">
@@ -495,32 +505,32 @@
   </div>
 </section>
 
-<!-- 49 · Can AI see the loop (backup) -->
+<!-- 50 · Can AI see the loop (backup) -->
 <section class="slide" data-sec="0" data-notes="Why is one fast and the other slow? It is not difficulty. It is whether AI can see the loop. Board design lives entirely in files: design, check, fix. AI sees every step and can act on every step, so the loop turns in hours. Wire bonding lives in hands and eyes: set the machine, bond, look through the microscope. AI sees none of it. So the way to position ourselves is to make the bench visible: log every bond with its settings, a picture and the result; use fixtures so every run is the same; and have an automatic pass or fail. Then when a smarter AI arrives, we can point it at the bonder, and a two-month problem becomes an afternoon problem.">
   <h1>The difference: can AI see the loop?</h1>
   <div class="fill"><img class="plot" src="assets/plots/two_loops.svg?v=8" alt="Two loops. Board design: design, check, fix, all in files, AI sees every step, turns in hours. Wire bonding: set, bond, look, in hands and eyes, AI sees nothing, turns in days. To fix it: log every bond, repeatable fixtures, automatic pass or fail."></div>
 </section>
 
-<!-- 50 · The list, sorted (backup) -->
+<!-- 51 · The list, sorted (backup) -->
 <section class="slide" data-sec="0" data-notes="Now take the 2019 list and sort it by that one question: can AI see the loop? In files: power, which is circuit design; data; and spike sorting. These are design problems, and our boards show what happens to design problems now: 26 versions in 20 days. In hands: making the probes, inserting them, and assembling them. That is where our bonding sits: two months. On biology's clock: whether tissue tolerates it, and how long probes last. A chronic study takes months, whatever AI does. This sorting is our judgment, not a result. But it tells us where to work: the middle column is the one we can move into the first.">
   <h1>The same list, sorted by what AI can see</h1>
   <div class="fill"><img class="plot" src="assets/plots/sorted2019.svg?v=7" alt="The eight problems sorted into three columns. In files, AI sees every step: power, data, spike sorting. In hands, AI sees nothing yet: probes, insertion, assembly. On biology's clock, AI cannot shorten it: tissue, lifetime."></div>
   <p class="foot-note">The sorting is our judgment, not a result</p>
 </section>
 
-<!-- 51 · Ladder · static version (backup) -->
+<!-- 52 · Ladder · static version (backup) -->
 <section class="slide" data-sec="0" data-notes="What we built. One ASIC has 512 recording and 128 stimulation channels; that works on the bench today. One head is a stack of boards carrying eight ASICs: 4,096 recording, 1,024 stimulation. That is the 4K system, designed this semester. Eight heads on one host board is 32,768 recording and 8,192 stimulation channels.">
   <h1>From one chip to 32,768 channels</h1>
   <div class="fill"><img class="plot" src="assets/plots/chips.svg?v=11" alt="Drawn to scale. One ASIC, 512 channels, working. Times eight: one head of eight ASICs, 4,096 channels, designed. Times eight: eight heads, 64 ASICs, 32,768 channels, next; one of the eight heads is filled in, the one designed."></div>
 </section>
 
-<!-- 52 · Slowest loop · static version (backup) -->
+<!-- 53 · Slowest loop · static version (backup) -->
 <section class="slide" data-sec="0" data-notes="So what sets the slope of that curve from earlier? How fast we iterate: 4K to 32K, 32K to 100K, and beyond. And our iteration is three loops. Design: with AI, the HDMI board went through 26 versions in 20 days, about a day per turn. Fabrication: weeks; the first board went out at the end of October and is not back yet. Bonding: two months. If you want a hundred or a thousand times the productivity, design is no longer the bottleneck. The bottleneck is atoms, and checking that what AI produced is right. The slowest loop sets the slope.">
   <h1>The slowest loop sets the slope</h1>
   <div class="fill"><img class="plot" src="assets/plots/loops.svg?v=8" alt="Days for one turn of each loop: design 1 day, fabrication about 3 weeks, bonding 2 months"></div>
 </section>
 
-<!-- 53 · The number (backup) -->
+<!-- 54 · The number (backup) -->
 <section class="slide" data-sec="0" data-notes="For a human brain, every neuron is this number: about 86 billion. That is what done looks like. Most fields cannot say what done looks like. We can.">
   <div class="mid">
     <p class="huge">86,000,000,000</p>
@@ -528,7 +538,7 @@
   </div>
 </section>
 
-<!-- 54 · Principle (backup) -->
+<!-- 55 · Principle (backup) -->
 <section class="slide" data-sec="0" data-notes="So how do we make each step faster than the last, and how do we make AI work for neuroengineering? Our answer is one principle. Make every part reusable. If the work of this step is still working at the next step, the next step starts ahead. If it has to be redone, we are back on the straight line. Everything I show you about the system is this principle applied to one part at a time.">
   <div class="mid">
     <p class="dateline">How each step gets faster</p>
