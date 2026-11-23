@@ -3,7 +3,7 @@
 :root{--ink:#17120F;--muted:#6B675E;--soft:#A29E92;--line:#D6D3C8;--accent:#0F4D92;--tint:#DDE3E6;--paper:#ECEAE2}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;background:var(--paper);color:var(--ink);overflow:hidden;
-  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
 [hidden]{display:none!important}
 button{font:inherit;cursor:pointer}
 
@@ -317,3 +317,12 @@ img.onpaper{mix-blend-mode:multiply}
 .rm .rows .row:last-child{border-bottom:1px solid var(--line)}
 /* tiles whose heading is words, not a number (the lunch proposal): the numeral stays small above */
 .rules.three li b{min-height:1.12em}
+
+/* one typeface everywhere (23 Nov): Arial, the same face the plots are drawn in. Arial has no semibold, so 600 shows as bold;
+   the tightest tracking, tuned for the system font, is relaxed a little */
+button,input,table{font-family:inherit}
+.cover.ask h1,.cover.ask .age{letter-spacing:-.02em}
+.big{letter-spacing:-.025em}.huge{letter-spacing:-.03em}
+h1{letter-spacing:-.015em}
+.coin .pair.head h2{letter-spacing:-.02em}
+.slide.closing .big.fit{font-size:70px}

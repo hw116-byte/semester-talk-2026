@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Every neuron</title>
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="deck.css?v=31">
+<link rel="stylesheet" href="deck.css?v=33">
 <script defer src="app.js?v=2"></script>
 <script defer src="semester.js?v=11"></script>
 </head>
@@ -74,7 +74,18 @@
   </div>
 </section>
 
-<!-- 6 · Three principles -->
+<!-- 6 · Eight steps, each faster (statement; moved here from the end on 23 Nov) -->
+<section class="slide closing" data-sec="1" data-notes="So that is the road. From one head to every neuron: eight steps of times eight. At the pace of history they take two centuries. They only fit in our lifetimes if each one is faster than the last. The rest of this talk is about how: first the principles we work by, then the system we built with them.">
+  <div class="mid">
+    <p class="dateline">From one head to every neuron</p>
+    <p class="big fit">Eight steps. Each one faster than the last.</p>
+    <img id="path" src="assets/plots/path.svg?v=9" alt="The path: 512, 4K now, 32K, 100K, a new probe, every neuron">
+  </div>
+  <img class="band" src="assets/art/cajal/retina_band_ink.png?v=4" alt="A row of many nerve cells of the retina, drawn in ink by Santiago Ramón y Cajal">
+  <p class="credit">Drawing: Santiago Ramón y Cajal · scan: Wellcome Collection, CC BY 4.0</p>
+</section>
+
+<!-- 7 · Three principles -->
 <section class="slide" data-sec="2" data-notes="So how do we work, when we know a much stronger AI is coming? Three principles. [next] One: make it fungible. Whatever we build today, a stronger AI that arrives next year should be able to pick up and use: the files, the tools, the fixtures. The work we lay down today has to stay useful. [next] Two: build with the next step in mind. Every design decision is also a decision about the step after this one. [next] Three: close the loop. Design, build and test have to be one loop, and our job is to make that loop turn faster every time.">
   <h1>Three principles for building with AI</h1>
   <ol class="rules three build" data-steps>
@@ -84,7 +95,7 @@
   </ol>
 </section>
 
-<!-- 7 · The caution: AI's work is still my work -->
+<!-- 8 · The caution: AI's work is still my work -->
 <section class="slide" data-sec="2" data-notes="One caution before my own work, and it is about people, not machines. When someone hands me work that AI made, I get an uneasy feeling. I cannot tell how much they understand it, or how much care went into it. I think most of us feel this. And I have been on the other side. [Tell the fixture story here, out loud: I used AI to design a holder so the bonder's suction could grip the board, from photographs and the board's dimensions. I sent the file to a colleague who runs the mill and asked if it could be cut in aluminium. He helped, as he always does, and he also told me the file could not be milled as it was. I meant to make something easy. What I handed him was something that looked finished and that I did not fully understand, and an expert sees that at once.] So the rule I take from it: what AI makes for me is still my work. Before I hand it on, I should be able to explain it, and it should have been checked against how it will really be made. Otherwise I am passing my uncertainty to the next person, and they pay for it.">
   <div class="mid">
     <p class="dateline">One caution</p>
@@ -93,7 +104,7 @@
   </div>
 </section>
 
-<!-- 8 · Roadmap of Howard's part -->
+<!-- 9 · Roadmap of Howard's part -->
 <section class="slide" data-sec="2" data-notes="From here on it is mostly my own work: the 4K project. I want to show that it follows those three principles, so here is the road map, with each stop marked by the principle it shows. [next] First the system itself, part by part, from the probe to the computer. It is one chip repeated, and its host was built with eight ports from the start. [next] Then how the probe goes onto the chip. The next step leaves only 1.1 millimetres for it, and today that work is done by hand. [next] Then what carries forward from 512 to 4K to 32K, and what does not. [next] And last the loops: how long one turn of design, fabrication and bonding takes, and what is still open. [Howard: a draft. Check which principle belongs to which stop.]">
   <h1>The 4K project, by the same three principles</h1>
   <div class="rm">
@@ -107,7 +118,7 @@
   </div>
 </section>
 
-<!-- 9 · Draft marker -->
+<!-- 10 · Draft marker -->
 <section class="slide" data-sec="2" data-notes="[A note to ourselves, not for the audience.] From here on the slides are mostly AI-generated. The content is what I want to cover; the slides are not at the level I want and will change.">
   <div class="mid">
     <p class="dateline">Draft from here on</p>
@@ -116,7 +127,7 @@
   </div>
 </section>
 
-<!-- 10 · Four rules -->
+<!-- 11 · Four rules -->
 <section class="slide draft" data-sec="2" data-notes="Four rules follow from that, and you will see each of them in the hardware. One: one part, repeated. The same chip eight times makes a head, and the same head eight times makes 32K. Two: one joint everywhere. Every board-to-board connection in the head is the same connector at the same height, so boards can be swapped and restacked. Three: build the next step's host first. The host board has had eight ports from the first version, although we only need one today. Four: every board can be tested alone. Each one ships in a frame with its own test points. And under all four: the design lives in files, so AI can turn the loop. The host board went through 26 versions in 20 days.">
   <h1>Four rules we design by</h1>
   <ol class="rules build" data-steps>
@@ -128,7 +139,7 @@
   <p class="foot-note">And all of it lives in files, so AI can turn the loop: the host board went through 26 versions in 20 days.</p>
 </section>
 
-<!-- 11 · One chip to eight heads (three steps) -->
+<!-- 12 · One chip to eight heads (three steps) -->
 <section class="slide draft" data-sec="2" data-notes="What we built. One ASIC has 512 recording and 128 stimulation channels; that works on the bench today. [next] One head is a stack of boards carrying eight of the same ASIC: 4,096 recording, 1,024 stimulation. That is the 4K system, designed this semester. [next] Eight of the same head on one host board is 32,768 recording and 8,192 stimulation channels. Nothing in the third picture is a new part. That is what makes it one step of times eight and not a new project.">
   <h1>The same chip, eight times, and eight times again</h1>
   <div class="fill frames" data-steps>
@@ -138,21 +149,21 @@
   </div>
 </section>
 
-<!-- 12 · 3D system -->
+<!-- 13 · 3D system -->
 <section class="slide draft" data-sec="3" data-notes="The system in 3D, from the real board models. Eight heads, each on its own Micro-HDMI cable, into the HDMI Extension Board with the FPGA module, then PCI Express to the PC. Click a board to see what it does. The second view puts the heads on the animal.">
   <div class="row"><h1>The 4K head, and eight of them</h1>
     <div class="seg" id="approach"><button data-approach="custom" aria-pressed="true">System</button><button data-approach="head" aria-pressed="false">On the head</button></div></div>
   <div class="fill"><iframe id="overview-frame" data-src="assets/overview-3d/index.html?embed=1&amp;approach=custom" title="3D overview of the recording system" allow="fullscreen"></iframe></div>
 </section>
 
-<!-- 13 · Signal path -->
+<!-- 14 · Signal path -->
 <section class="slide draft" data-sec="3" data-notes="Here is the path a signal takes, from the brain to the computer. I will go through it one part at a time, and for each part I will answer the same three questions: what it does, what we decided and why, and what happens to it at 32K. The row of names at the top of each slide is this path; the blue one is where we are.">
   <h1>From the brain to the computer, one part at a time</h1>
   <div class="fill"><img class="plot onpaper" src="assets/system/fig_data_path.svg?v=1" alt="The data path from the probe through the ASIC, the head boards, the cable and the host board to the computer"></div>
   <p class="foot-note">For each part: what it does · what we decided · what happens to it at 32K</p>
 </section>
 
-<!-- 14 · Part: probe -->
+<!-- 15 · Part: probe -->
 <section class="slide draft part" data-sec="3" data-notes="The first part is the probe. This is the SC512: four shanks, each 80 micrometres wide and about 7 millimetres long, 128 recording sites on each, 512 in all. Its back end has 512 pads on a 180 micrometre grid. We did not redesign it. One probe goes on each ASIC, so a head carries eight and the 32K system carries sixty-four. The picture also shows the ribbon cable that today sits between the probe and the chip; that is the next part. [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: SC512 · 3.24 × 14.78 mm · shanks 80 µm wide, 7.12 mm long · 512 pads on a 16 × 32 grid at 180 µm.">
   <p class="chain"><b>Probe</b><span>Bond</span><span>ASIC</span><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>The probe</h1>
@@ -167,7 +178,7 @@
   </div>
 </section>
 
-<!-- 15 · Part: ASIC -->
+<!-- 16 · Part: ASIC -->
 <section class="slide draft part" data-sec="3" data-notes="The ASIC. One chip records 512 channels at 12 bits and 31.25 kilosamples per second each, and stimulates on 128 channels. Noise is 4 to 5 microvolts, power under 20 microwatts per channel, and the die is about 8 by 7 millimetres. This is the part we treat as fixed. Every other decision in the system is about how to repeat this chip: eight in a head, sixty-four at 32K. This photograph is our own, of one chip bonded on its board. [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: 512 record · 128 stimulate · 12 bit · 31.25 kS/s per channel · 0.3 to 10 kHz · 4 to 5 µVrms · under 20 µW per channel · 8.1 × 7 mm.">
   <p class="chain"><span>Probe</span><span>Bond</span><b>ASIC</b><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>The ASIC</h1>
@@ -182,13 +193,13 @@
   </div>
 </section>
 
-<!-- 16 · Bonding today -->
+<!-- 17 · Bonding today -->
 <section class="slide draft" data-sec="3" data-notes="The other half is getting the probe onto the chip. This is how one probe goes onto one ASIC today. The counter is the wire bonder: five passes, 1,024 rivets, then the probe is flipped over the chip. For 4K that is eight times per head.">
   <h1>Probe onto chip, today</h1>
   <div class="fill"><iframe data-src="assets/bonding-steps/index.html?autoplay=1&amp;v=5" title="Probe bonding, step by step" allow="fullscreen"></iframe></div>
 </section>
 
-<!-- 17 · Part: the 1.1 mm -->
+<!-- 18 · Part: the 1.1 mm -->
 <section class="slide draft part" data-sec="3" data-notes="Why does the bonding have to change at all? Because of the stack. To fit eight ASICs on a head, the ASIC boards sit one above the other, 1.5 millimetres apart, joined by the same connector everywhere. The parts on the board above hang into that gap, so what is left above each ASIC board is about 1.1 millimetres. Today's build, with the ribbon, stands about 2.8. It does not fit. So the build has to change, and that is the proposal on the next slide.">
   <p class="chain"><span>Probe</span><b>Bond</b><span>ASIC</span><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>Why the bond has to change: 1.1 mm</h1>
@@ -196,7 +207,7 @@
   <p class="nums">Boards 0.8 mm thick · 1.5 mm to the next board · 1.1 mm left above each ASIC board · today's build stands about 2.8 mm</p>
 </section>
 
-<!-- 18 · Proposal -->
+<!-- 19 · Proposal -->
 <section class="slide draft" data-sec="3" data-notes="The 4K stack leaves only about 1.1 millimetres above each ASIC board. Today's build stands about 2.8. So the proposal is to put the probe directly on the ASIC: three wire-bonder passes instead of five, and it fits.">
   <h1>Proposal: probe directly on the ASIC</h1>
   <div class="fill duo">
@@ -205,7 +216,7 @@
   </div>
 </section>
 
-<!-- 19 · Part: ASIC board -->
+<!-- 20 · Part: ASIC board -->
 <section class="slide draft part" data-sec="3" data-notes="The ASIC board carries two ASICs. Four of these boards make a head: a bottom and a top board on each side. Two decisions here. First, the top and bottom boards share one layer stack, so they are made the same way. Second, the bottom board passes every supply rail straight up to the top board, so one port below feeds four ASICs. It is ten layers in 0.8 millimetres, which is at the edge of what the factory will do; they have not confirmed it yet. This board is designed and on hold, not ordered. [Howard: say why it is on hold.] [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: V15 · 2 ASICs per board · 10 layers in 0.8 mm · 22.5 × 17.1 mm · designed, on hold, not ordered.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><b>ASIC board</b><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>The ASIC board</h1>
@@ -220,7 +231,7 @@
   </div>
 </section>
 
-<!-- 20 · Part: power board -->
+<!-- 21 · Part: power board -->
 <section class="slide draft part" data-sec="3" data-notes="The power board, which we call the FPGA-LDO board. It takes 3.3 volts and makes the seven quiet supplies the ASICs need, plus plus and minus 8 volts for stimulation. Analog and digital ground meet at a single point. It sits in the middle of the head with two identical ports, one up and one down, each feeding four ASICs. We looked at two layouts. Option B split this into two smaller boards and was two grams lighter, but it needed at least 132 contacts through one connector and the connector family stops at 120. So Option A it is, and B was archived on 14 November. [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: FPGA-LDO, Option A · layout V24 · 6 layers · 22.6 × 36.8 mm · two 80-pin ports · at the factory for review, not paid.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><span>ASIC board</span><b>Power board</b><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>The power board</h1>
@@ -235,7 +246,7 @@
   </div>
 </section>
 
-<!-- 21 · Part: frontend FPGA -->
+<!-- 22 · Part: frontend FPGA -->
 <section class="slide draft part" data-sec="3" data-notes="The frontend FPGA board. Each ASIC puts out eight data lines at 32 megahertz, so a head has sixty-four. An Artix-7 on the head captures all of them and sends them out as one serial lane at 3.125 gigabits per second. That is what lets a whole head leave on a single cable. It is fourteen layers on a board about 23 by 25 millimetres. The firmware has not been built yet: the design tools have never been run on it. [Howard: confirm the reason for putting the FPGA on the head.] [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: V14 · Artix-7 (XC7A35T) · 14 layers · 22.6 × 25.5 mm · one lane at 3.125 Gb/s · at the factory for review, not paid.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><span>ASIC board</span><span>Power board</span><b>Frontend FPGA</b><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>The frontend FPGA board</h1>
@@ -250,7 +261,7 @@
   </div>
 </section>
 
-<!-- 22 · Part: the head -->
+<!-- 23 · Part: the head -->
 <section class="slide draft part" data-sec="3" data-notes="Put together, that is one head: the frontend FPGA board on top, the power board under it, and two pairs of ASIC boards, one pair above and one below. Every joint between boards is the same connector at the same 1.5 millimetre height. The whole stack is about 23 by 47 by 14 millimetres, and we estimate 8 to 10 grams. One thing still open: the connectors are not keyed, so an ASIC board can be plugged in turned around. That is on the list at the end.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><b>ASIC board</b><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>One head: eight ASICs in 23 × 47 × 14 mm</h1>
@@ -258,7 +269,7 @@
   <p class="nums">22.64 × 47.05 × 13.71 mm · 8 to 10 g, estimated · every board-to-board joint is the same connector (Hirose DF40C, 1.5 mm)</p>
 </section>
 
-<!-- 23 · Part: cable -->
+<!-- 24 · Part: cable -->
 <section class="slide draft part" data-sec="3" data-notes="The cable. Each head connects with one ordinary Micro-HDMI cable, about a metre long. We use its wire pairs our own way: one pair carries the recording lane up, one carries a 32 megahertz clock down, one carries commands, and one pin carries all of the head&#x27;s power at 5 volts. Because every head gets the same clock from the host, all sixty-four ASICs sample at the same instant. One detail to check: the plug has to be under 12.5 millimetres wide and the cable we picked is listed at 12.7. [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: Micro-HDMI to Micro-HDMI, 3 ft · chosen 16 Nov, not bought yet.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><b>Cable</b><span>Host board</span><span>PC</span></p>
   <h1>The cable</h1>
@@ -273,7 +284,7 @@
   </div>
 </section>
 
-<!-- 24 · Part: host board -->
+<!-- 25 · Part: host board -->
 <section class="slide draft part" data-sec="3" data-notes="The host board, which we call the HDMI Extension Board. It has eight Micro-HDMI ports, makes 5 volts for the heads with a current limit on each port, sends each port its clock, and carries the FPGA module. Two decisions matter here. It has had eight ports from the very first version, although one head needs one. So going to 32K does not touch this board. And we did not invent its shape or its link to the PC: both are copied from the reference board that the module maker publishes. This is the board that went from version 14 to version 40 in twenty days. [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: HDMI Extension Board V40 · 8 ports · 6 layers · 168 × 114 mm · 5 V at 6 A, each port current-limited · PCI Express × 4 · at the factory for review, not paid.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><b>Host board</b><span>PC</span></p>
   <h1>The host board</h1>
@@ -288,7 +299,7 @@
   </div>
 </section>
 
-<!-- 25 · Part: numbers to the PC -->
+<!-- 26 · Part: numbers to the PC -->
 <section class="slide draft part" data-sec="3" data-notes="At the far end is a bought FPGA module, an Opal Kelly XEM8310, and the PC. The numbers: one head is 1.5 gigabits per second of recording data. Its lane runs at 3.125. One head fits through USB 3. Eight heads are 12.3 gigabits per second, and that needs PCI Express, four lanes at generation 3, which the host board already has. One honest caveat: a review found that the raw capture format as written needs 2.56 gigabits per head, slightly more than the lane's 2.5 of payload. That has to be settled in the firmware.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><b>PC</b></p>
   <h1>To the computer: the numbers</h1>
@@ -300,7 +311,7 @@
   <p class="nums">FPGA module: Opal Kelly XEM8310, bought · one head fits through USB 3 · eight heads need PCI Express × 4, generation 3, which the host board already has</p>
 </section>
 
-<!-- 26 · KiCad -->
+<!-- 27 · KiCad -->
 <section class="slide draft" data-sec="3" data-notes="The boards as laid out in KiCad; the viewer reads the real board files, so you can zoom and switch layers. HDMI Extension: eight Micro-HDMI ports and a PCI Express edge. Frontend FPGA: an Artix-7 on fourteen layers, small enough to sit on the head. FPGA-LDO: the clean supplies for the ASICs. All pass design-rule checks with zero errors, order files are made, nothing is ordered yet.">
   <div class="row"><h1>The boards</h1>
     <div class="seg switch"><button data-view="lv-hdmi" aria-selected="true">HDMI Extension</button><button data-view="lv-frontend" aria-selected="false">Frontend FPGA</button><button data-view="lv-ldo" aria-selected="false">FPGA-LDO</button></div></div>
@@ -311,7 +322,7 @@
   </div>
 </section>
 
-<!-- 27 · Test frames -->
+<!-- 28 · Test frames -->
 <section class="slide draft" data-sec="3" data-notes="Rule four in practice. Each board comes back from the factory inside a break-off frame, 70 by 70 millimetres, with a header and test points, so it can be powered and probed on the bench on its own before it goes into a stack. Our professor asked for this, after the test board of the Open Ephys ONIX system. The frame does a second job: it is the panel the factory needs to assemble such a small board. On the right are the test points on the host board. Click a picture to zoom.">
   <h1>Every board can be tested alone</h1>
   <div class="fill shots three">
@@ -321,13 +332,13 @@
   </div>
 </section>
 
-<!-- 28 · Software -->
+<!-- 29 · Software -->
 <section class="slide draft" data-sec="3" data-notes="The software that runs the chip: it records all 512 channels, programs the stimulators, and can do both together. This is a real recording from this week, drawn in the layout of the chip; red frames are stimulator channels.">
   <h1>All 512 channels, live</h1>
   <div class="fill shots"><figure><img data-zoom src="assets/software/lab_tools_map_real_recording.png" alt="A real recording shown as a map of all 512 channels"></figure></div>
 </section>
 
-<!-- 29 · Status -->
+<!-- 30 · Status -->
 <section class="slide draft" data-sec="4" data-notes="Where it all stands today, plainly. The chip, the probe and the 512-channel setup work, and the software made its first recording from the real chip this month. The three new boards, the host, the frontend and the power board, were submitted to the factory on 22 November as bare boards and are under review; they are not paid for yet. The ASIC board is designed and on hold. The FPGA module is bought, the cable is chosen. Nothing of the 4K system has been tested, because nothing of it exists yet. That is the honest state: the design is done, and the building starts now.">
   <h1>Where it stands today</h1>
   <table class="state">
@@ -342,7 +353,7 @@
   </table>
 </section>
 
-<!-- 30 · What carries forward -->
+<!-- 31 · What carries forward -->
 <section class="slide draft" data-sec="4" data-notes="[Three columns arrive one at a time: 512, then 4K, then 32K.] This is the same system, sorted by one question: at each generation, what was new work and what was reused as it is? A blue dot is new work. An open circle is reused. The ASIC was the work of the 512 generation, and it is reused eight times in a head and 64 times at 32K. The head boards and the host board were the work of this semester, and the host board already has eight ports, so 32K reuses both. One row is different. Putting the probe onto the chip is done again by hand, every time: once, then eight times, then 64 times. That row is the one that does not carry forward. [Howard: check every cell of this table; it is my reading of the system.]">
   <h1>What carries forward, and what does not</h1>
   <div class="fill carrywrap">
@@ -352,7 +363,7 @@
   <p class="nums"><i class="k new"></i>new work <i class="k same"></i>reused as it is <i class="k hand"></i>done again by hand, every time</p>
 </section>
 
-<!-- 31 · The slowest loop (three steps) -->
+<!-- 32 · The slowest loop (three steps) -->
 <section class="slide draft" data-sec="4" data-notes="So what sets how long a step takes? Its slowest loop. Design: with AI, the HDMI board went through 26 versions in 20 days, about a day per turn. [next] Fabrication: about three weeks a turn. [next] Bonding: two months, by hand, and not fully solved. It took me, Weinan and Pablo a long time, and the manufacturer's engineer too. Design is no longer the bottleneck. The loop done by hand is, and it is also the one row that did not carry forward. So this is where the next step of times eight will be won or lost: make bonding a loop that turns in days, or remove it with the direct-on-ASIC build.">
   <h1>The slowest loop sets the pace of a step</h1>
   <div class="fill frames" data-steps>
@@ -362,7 +373,7 @@
   </div>
 </section>
 
-<!-- 32 · What is still open -->
+<!-- 33 · What is still open -->
 <section class="slide draft" data-sec="4" data-notes="And what is still open. I would rather show you this list than have you find it. How the probe attaches in the new build is not decided: we have to hold it flat and release it from its wafer piece, and the pad rows on the probe and the chip do not line up yet, 409 micrometres against 720. The firmware has never been built. The head-to-host link has almost no margin with the capture format as written. The head will run warm; the estimate is 14 to 62 degrees above ambient depending on assumptions, which is too wide to trust. The connectors are not keyed. And two things wait on the factories: ten layers in 0.8 millimetres, and copper across the break-off tabs. Each of these is a loop to turn, and most of them live in files.">
   <h1>What is still open</h1>
   <ol class="rules open">
@@ -375,25 +386,14 @@
   </ol>
 </section>
 
-<!-- 33 · A proposal: a monthly AI lunch -->
-<section class="slide" data-sec="4" data-notes="One proposal for the lab before I close. We all use AI now, a great deal, and each of us uses it differently. The work we hand each other has a lot of AI in it. But we almost never talk about how we use it. I think we would all gain from sharing that. So I propose a lunch, once a month, where we simply tell each other how we use it in our daily work: what worked, what did not, what we would not trust it with. And whenever a new model comes out, we meet and ask one question: what should it change in how we build our system? I would like to hear how each of you wants to use these tools.">
+<!-- 34 · A proposal: a monthly AI lunch -->
+<section class="slide" data-sec="4" data-notes="One proposal for the lab before I close. We all use AI now, a great deal, and each of us uses it differently. The work we hand each other has a lot of AI in it. But we almost never talk about how we use it. I think we would all gain from sharing that. So I propose a lunch, once a month, where we simply tell each other how we use it in our daily work: what worked, what did not, what we would not trust it with. And whenever a new model comes out, we meet and ask one question: what should it change in how we build our system? I would like to hear how each of you wants to use these tools. Thank you.">
   <h1>A proposal: a monthly AI lunch</h1>
   <ol class="rules three build" data-steps>
     <li class="on"><b>Why</b><span>We all use AI, a lot, and each of us differently. We almost never talk about it.</span></li>
     <li><b>What</b><span>Once a month, over lunch: how each of us uses it in daily work. What worked, and what did not.</span></li>
     <li><b>And when a new model comes out</b><span>We meet and ask one question: what should it change in how we build our system?</span></li>
   </ol>
-</section>
-
-<!-- 34 · Close -->
-<section class="slide draft closing" data-sec="4" data-notes="So, back to the question from the start. From one head to every neuron is eight steps of times eight. At the pace of history they take two centuries. They only fit in our lifetimes if each one is faster than the last, and that means two things for how we work: build every generation so the next one can reuse it, and go after the slowest loop, which today is the one done by hand. 4K to 32K is the first step, and it is designed. Thank you.">
-  <div class="mid">
-    <p class="dateline">From one head to every neuron</p>
-    <p class="big fit">Eight steps. Each one faster than the last.</p>
-    <img id="path" src="assets/plots/path.svg?v=9" alt="The path: 512, 4K now, 32K, 100K, a new probe, every neuron">
-  </div>
-  <img class="band" src="assets/art/cajal/retina_band_ink.png?v=4" alt="A row of many nerve cells of the retina, drawn in ink by Santiago Ramón y Cajal">
-  <p class="credit">Drawing: Santiago Ramón y Cajal · scan: Wellcome Collection, CC BY 4.0</p>
 </section>
 
 <!-- 35 · Backup divider -->
