@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-11-22T11:16:20.879073</dc:date>
+    <dc:date>2026-11-22T19:28:31.162385</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -40,7 +40,7 @@ Q 33.84 86.4 33.84 95.04
 L 33.84 189.36 
 Q 33.84 198 42.48 198 
 z
-" clip-path="url(#pff4871dc01)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
+" clip-path="url(#p6faf28c229)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
    </g>
    <g id="patch_3">
     <path d="M 287.28 198 
@@ -53,7 +53,7 @@ Q 278.64 86.4 278.64 95.04
 L 278.64 189.36 
 Q 278.64 198 287.28 198 
 z
-" clip-path="url(#pff4871dc01)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
+" clip-path="url(#p6faf28c229)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
     <path d="M 532.08 198 
@@ -66,7 +66,7 @@ Q 523.44 86.4 523.44 95.04
 L 523.44 189.36 
 Q 523.44 198 532.08 198 
 z
-" clip-path="url(#pff4871dc01)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
+" clip-path="url(#p6faf28c229)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
     <path d="M 776.88 198 
@@ -79,7 +79,7 @@ Q 768.24 86.4 768.24 95.04
 L 768.24 189.36 
 Q 768.24 198 776.88 198 
 z
-" clip-path="url(#pff4871dc01)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
+" clip-path="url(#p6faf28c229)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
    </g>
    <g id="patch_6">
     <path d="M 42.48 349.2 
@@ -92,7 +92,7 @@ Q 33.84 237.6 33.84 246.24
 L 33.84 340.56 
 Q 33.84 349.2 42.48 349.2 
 z
-" clip-path="url(#pff4871dc01)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
+" clip-path="url(#p6faf28c229)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
    </g>
    <g id="patch_7">
     <path d="M 287.28 349.2 
@@ -105,7 +105,7 @@ Q 278.64 237.6 278.64 246.24
 L 278.64 340.56 
 Q 278.64 349.2 287.28 349.2 
 z
-" clip-path="url(#pff4871dc01)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
+" clip-path="url(#p6faf28c229)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
    </g>
    <g id="patch_8">
     <path d="M 532.08 349.2 
@@ -118,7 +118,7 @@ Q 523.44 237.6 523.44 246.24
 L 523.44 340.56 
 Q 523.44 349.2 532.08 349.2 
 z
-" clip-path="url(#pff4871dc01)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
+" clip-path="url(#p6faf28c229)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
    </g>
    <g id="patch_9">
     <path d="M 776.88 349.2 
@@ -131,7 +131,7 @@ Q 768.24 237.6 768.24 246.24
 L 768.24 340.56 
 Q 768.24 349.2 776.88 349.2 
 z
-" clip-path="url(#pff4871dc01)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
+" clip-path="url(#p6faf28c229)" style="fill: #eceae2; stroke: #000000; stroke-width: 1.6; stroke-linejoin: miter"/>
    </g>
    <g id="text_1">
     <!-- Probes -->
@@ -291,7 +291,7 @@ z
    </g>
    <g id="text_2">
     <!-- 6 µm shanks, 35 nm wires -->
-    <g style="fill: #767676" transform="translate(54 171.898) scale(0.155 -0.155)">
+    <g style="fill: #7c7e7f" transform="translate(54 171.898) scale(0.155 -0.155)">
      <defs>
       <path id="ArialMT-36" d="M 3184 3459 
 L 2625 3416 
@@ -717,7 +717,7 @@ z
    </g>
    <g id="text_4">
     <!-- 0.2 µW per channel -->
-    <g style="fill: #767676" transform="translate(298.8 171.898) scale(0.155 -0.155)">
+    <g style="fill: #7c7e7f" transform="translate(298.8 171.898) scale(0.155 -0.155)">
      <defs>
       <path id="ArialMT-30" d="M 266 2259 
 Q 266 3072 433 3567 
@@ -979,7 +979,7 @@ z
    </g>
    <g id="text_6">
     <!-- find spikes at the probe -->
-    <g style="fill: #767676" transform="translate(543.6 171.969445) scale(0.155 -0.155)">
+    <g style="fill: #7c7e7f" transform="translate(543.6 171.969445) scale(0.155 -0.155)">
      <defs>
       <path id="ArialMT-66" d="M 556 0 
 L 556 2881 
@@ -1296,7 +1296,7 @@ z
    </g>
    <g id="text_8">
     <!-- 20 million channels -->
-    <g style="fill: #767676" transform="translate(788.4 171.874992) scale(0.155 -0.155)">
+    <g style="fill: #7c7e7f" transform="translate(788.4 171.874992) scale(0.155 -0.155)">
      <use xlink:href="#ArialMT-32"/>
      <use xlink:href="#ArialMT-30" x="55.615234"/>
      <use xlink:href="#ArialMT-20" x="111.230469"/>
@@ -1343,7 +1343,7 @@ z
    </g>
    <g id="text_10">
     <!-- a shank every 40 µm -->
-    <g style="fill: #767676" transform="translate(54 323.00718) scale(0.155 -0.155)">
+    <g style="fill: #7c7e7f" transform="translate(54 323.00718) scale(0.155 -0.155)">
      <defs>
       <path id="ArialMT-76" d="M 1344 0 
 L 81 3319 
@@ -1511,7 +1511,7 @@ z
    </g>
    <g id="text_12">
     <!-- electronics on every shank -->
-    <g style="fill: #767676" transform="translate(298.8 322.984172) scale(0.155 -0.155)">
+    <g style="fill: #7c7e7f" transform="translate(298.8 322.984172) scale(0.155 -0.155)">
      <use xlink:href="#ArialMT-65"/>
      <use xlink:href="#ArialMT-6c" x="55.615234"/>
      <use xlink:href="#ArialMT-65" x="77.832031"/>
@@ -1588,7 +1588,7 @@ z
    </g>
    <g id="text_14">
     <!-- is 2% displaced tolerated? -->
-    <g style="fill: #767676" transform="translate(543.6 323.169445) scale(0.155 -0.155)">
+    <g style="fill: #7c7e7f" transform="translate(543.6 323.169445) scale(0.155 -0.155)">
      <defs>
       <path id="ArialMT-25" d="M 372 3481 
 Q 372 3972 619 4315 
@@ -1744,7 +1744,7 @@ z
    </g>
    <g id="text_16">
     <!-- coatings degrade in months -->
-    <g style="fill: #767676" transform="translate(788.4 322.984172) scale(0.155 -0.155)">
+    <g style="fill: #7c7e7f" transform="translate(788.4 322.984172) scale(0.155 -0.155)">
      <defs>
       <path id="ArialMT-67" d="M 319 -275 
 L 866 -356 
@@ -1811,7 +1811,7 @@ z
    </g>
    <g id="text_17">
     <!-- Kleinfeld, Luan, Xie and others, 2019 -->
-    <g style="fill: #767676" transform="translate(33.84 51.453281) scale(0.18 -0.18)">
+    <g style="fill: #7c7e7f" transform="translate(33.84 51.453281) scale(0.18 -0.18)">
      <defs>
       <path id="ArialMT-4b" d="M 469 0 
 L 469 4581 
@@ -1967,7 +1967,7 @@ z
    </g>
    <g id="text_18">
     <!-- written before AI could help -->
-    <g style="fill: #767676" transform="translate(33.84 418.762969) scale(0.18 -0.18)">
+    <g style="fill: #7c7e7f" transform="translate(33.84 418.762969) scale(0.18 -0.18)">
      <defs>
       <path id="ArialMT-41" d="M -9 0 
 L 1750 4581 
@@ -2028,7 +2028,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pff4871dc01">
+  <clipPath id="p6faf28c229">
    <rect x="0" y="0" width="1025.28" height="468"/>
   </clipPath>
  </defs>
