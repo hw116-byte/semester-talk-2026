@@ -270,3 +270,24 @@ img.onpaper{mix-blend-mode:multiply}
 .coin .medal{top:100px;width:150px;height:150px;margin-left:-75px}
 .coin .seam.word{position:absolute;left:50%;top:262px;transform:translateX(-50%);margin:0;padding:6px 18px;border-radius:999px;background:#DDE2CD;border:1.5px solid #8d877b;color:#17120F;font-size:22px;font-weight:600;letter-spacing:-.01em}
 .coin .pairs{top:350px}
+
+/* slide 2, second draft (22 Nov): the shared start, with real portraits, then the two sides */
+.coin .seam.top{top:40px}
+.coin .pairs{top:82px;bottom:104px}
+.coin .pair.origin>div{display:flex;align-items:center;gap:26px;padding:0 34px 0 88px;font-weight:400}
+.coin .pair.origin>div:first-child{justify-content:flex-end;text-align:right}
+.coin .pair.origin>div:last-child{padding:0 88px 0 34px}
+.coin .pair.origin img{width:150px;height:196px;object-fit:cover;object-position:50% 18%;border:1.5px solid #8d877b;filter:grayscale(1) sepia(.32) contrast(1.04);flex:none}
+.coin .pair.origin span{display:flex;flex-direction:column;gap:8px;max-width:440px}
+.coin .pair.origin small{font-size:15px;letter-spacing:.09em;text-transform:uppercase;color:#8d877b;font-weight:400}
+.coin .pair.origin q{font-size:36px;line-height:1.1;font-weight:600;letter-spacing:-.02em;quotes:none}
+.coin .pair.origin>div:first-child q{quotes:"\201C" "\201D"}
+.coin .pair.origin>div:first-child q::before{content:open-quote}.coin .pair.origin>div:first-child q::after{content:close-quote}
+.coin .pair.origin>div:last-child q{font-style:italic}
+.coin .pair.origin em{font-style:normal;font-size:18px;line-height:1.35;color:var(--muted);letter-spacing:0}
+.coin .pair.origin>div:last-child em{color:#b9b3a6}
+.coin .pair.head h2{font-size:46px}
+.coin .pair.head p{font-size:22px}
+.coin .pair>div{font-size:27px}
+.coin .credit{position:absolute;left:88px;bottom:50px;margin:0;font-size:11px;color:var(--soft)}
+.coin .seam.top{left:50%;right:auto;top:30px;transform:translateX(-50%);padding:7px 18px;border-radius:999px;background:#DDE2CD;border:1.5px solid #8d877b;color:#17120F;font-size:13px;font-weight:600;white-space:nowrap}
