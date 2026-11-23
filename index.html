@@ -84,7 +84,16 @@
   </ol>
 </section>
 
-<!-- 7 · Roadmap of Howard's part -->
+<!-- 7 · The caution: AI's work is still my work -->
+<section class="slide" data-sec="2" data-notes="One caution before my own work, and it is about people, not machines. When someone hands me work that AI made, I get an uneasy feeling. I cannot tell how much they understand it, or how much care went into it. I think most of us feel this. And I have been on the other side. [Tell the fixture story here, out loud: I used AI to design a holder so the bonder's suction could grip the board, from photographs and the board's dimensions. I sent the file to a colleague who runs the mill and asked if it could be cut in aluminium. He helped, as he always does, and he also told me the file could not be milled as it was. I meant to make something easy. What I handed him was something that looked finished and that I did not fully understand, and an expert sees that at once.] So the rule I take from it: what AI makes for me is still my work. Before I hand it on, I should be able to explain it, and it should have been checked against how it will really be made. Otherwise I am passing my uncertainty to the next person, and they pay for it.">
+  <div class="mid">
+    <p class="dateline">One caution</p>
+    <p class="big fit">AI's work is still my work.</p>
+    <p class="sub">If I cannot explain it, the person I hand it to can tell.</p>
+  </div>
+</section>
+
+<!-- 8 · Roadmap of Howard's part -->
 <section class="slide" data-sec="2" data-notes="From here on it is mostly my own work: the 4K project. I want to show that it follows those three principles, so here is the road map, with each stop marked by the principle it shows. [next] First the system itself, part by part, from the probe to the computer. It is one chip repeated, and its host was built with eight ports from the start. [next] Then how the probe goes onto the chip. The next step leaves only 1.1 millimetres for it, and today that work is done by hand. [next] Then what carries forward from 512 to 4K to 32K, and what does not. [next] And last the loops: how long one turn of design, fabrication and bonding takes, and what is still open. [Howard: a draft. Check which principle belongs to which stop.]">
   <h1>The 4K project, by the same three principles</h1>
   <div class="rm">
@@ -98,7 +107,7 @@
   </div>
 </section>
 
-<!-- 8 · Draft marker -->
+<!-- 9 · Draft marker -->
 <section class="slide" data-sec="2" data-notes="[A note to ourselves, not for the audience.] From here on the slides are mostly AI-generated. The content is what I want to cover; the slides are not at the level I want and will change.">
   <div class="mid">
     <p class="dateline">Draft from here on</p>
@@ -107,7 +116,7 @@
   </div>
 </section>
 
-<!-- 9 · Four rules -->
+<!-- 10 · Four rules -->
 <section class="slide draft" data-sec="2" data-notes="Four rules follow from that, and you will see each of them in the hardware. One: one part, repeated. The same chip eight times makes a head, and the same head eight times makes 32K. Two: one joint everywhere. Every board-to-board connection in the head is the same connector at the same height, so boards can be swapped and restacked. Three: build the next step's host first. The host board has had eight ports from the first version, although we only need one today. Four: every board can be tested alone. Each one ships in a frame with its own test points. And under all four: the design lives in files, so AI can turn the loop. The host board went through 26 versions in 20 days.">
   <h1>Four rules we design by</h1>
   <ol class="rules build" data-steps>
@@ -119,7 +128,7 @@
   <p class="foot-note">And all of it lives in files, so AI can turn the loop: the host board went through 26 versions in 20 days.</p>
 </section>
 
-<!-- 10 · One chip to eight heads (three steps) -->
+<!-- 11 · One chip to eight heads (three steps) -->
 <section class="slide draft" data-sec="2" data-notes="What we built. One ASIC has 512 recording and 128 stimulation channels; that works on the bench today. [next] One head is a stack of boards carrying eight of the same ASIC: 4,096 recording, 1,024 stimulation. That is the 4K system, designed this semester. [next] Eight of the same head on one host board is 32,768 recording and 8,192 stimulation channels. Nothing in the third picture is a new part. That is what makes it one step of times eight and not a new project.">
   <h1>The same chip, eight times, and eight times again</h1>
   <div class="fill frames" data-steps>
@@ -129,21 +138,21 @@
   </div>
 </section>
 
-<!-- 11 · 3D system -->
+<!-- 12 · 3D system -->
 <section class="slide draft" data-sec="3" data-notes="The system in 3D, from the real board models. Eight heads, each on its own Micro-HDMI cable, into the HDMI Extension Board with the FPGA module, then PCI Express to the PC. Click a board to see what it does. The second view puts the heads on the animal.">
   <div class="row"><h1>The 4K head, and eight of them</h1>
     <div class="seg" id="approach"><button data-approach="custom" aria-pressed="true">System</button><button data-approach="head" aria-pressed="false">On the head</button></div></div>
   <div class="fill"><iframe id="overview-frame" data-src="assets/overview-3d/index.html?embed=1&amp;approach=custom" title="3D overview of the recording system" allow="fullscreen"></iframe></div>
 </section>
 
-<!-- 12 · Signal path -->
+<!-- 13 · Signal path -->
 <section class="slide draft" data-sec="3" data-notes="Here is the path a signal takes, from the brain to the computer. I will go through it one part at a time, and for each part I will answer the same three questions: what it does, what we decided and why, and what happens to it at 32K. The row of names at the top of each slide is this path; the blue one is where we are.">
   <h1>From the brain to the computer, one part at a time</h1>
   <div class="fill"><img class="plot onpaper" src="assets/system/fig_data_path.svg?v=1" alt="The data path from the probe through the ASIC, the head boards, the cable and the host board to the computer"></div>
   <p class="foot-note">For each part: what it does · what we decided · what happens to it at 32K</p>
 </section>
 
-<!-- 13 · Part: probe -->
+<!-- 14 · Part: probe -->
 <section class="slide draft part" data-sec="3" data-notes="The first part is the probe. This is the SC512: four shanks, each 80 micrometres wide and about 7 millimetres long, 128 recording sites on each, 512 in all. Its back end has 512 pads on a 180 micrometre grid. We did not redesign it. One probe goes on each ASIC, so a head carries eight and the 32K system carries sixty-four. The picture also shows the ribbon cable that today sits between the probe and the chip; that is the next part. [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: SC512 · 3.24 × 14.78 mm · shanks 80 µm wide, 7.12 mm long · 512 pads on a 16 × 32 grid at 180 µm.">
   <p class="chain"><b>Probe</b><span>Bond</span><span>ASIC</span><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>The probe</h1>
@@ -158,7 +167,7 @@
   </div>
 </section>
 
-<!-- 14 · Part: ASIC -->
+<!-- 15 · Part: ASIC -->
 <section class="slide draft part" data-sec="3" data-notes="The ASIC. One chip records 512 channels at 12 bits and 31.25 kilosamples per second each, and stimulates on 128 channels. Noise is 4 to 5 microvolts, power under 20 microwatts per channel, and the die is about 8 by 7 millimetres. This is the part we treat as fixed. Every other decision in the system is about how to repeat this chip: eight in a head, sixty-four at 32K. This photograph is our own, of one chip bonded on its board. [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: 512 record · 128 stimulate · 12 bit · 31.25 kS/s per channel · 0.3 to 10 kHz · 4 to 5 µVrms · under 20 µW per channel · 8.1 × 7 mm.">
   <p class="chain"><span>Probe</span><span>Bond</span><b>ASIC</b><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>The ASIC</h1>
@@ -173,13 +182,13 @@
   </div>
 </section>
 
-<!-- 15 · Bonding today -->
+<!-- 16 · Bonding today -->
 <section class="slide draft" data-sec="3" data-notes="The other half is getting the probe onto the chip. This is how one probe goes onto one ASIC today. The counter is the wire bonder: five passes, 1,024 rivets, then the probe is flipped over the chip. For 4K that is eight times per head.">
   <h1>Probe onto chip, today</h1>
   <div class="fill"><iframe data-src="assets/bonding-steps/index.html?autoplay=1&amp;v=5" title="Probe bonding, step by step" allow="fullscreen"></iframe></div>
 </section>
 
-<!-- 16 · Part: the 1.1 mm -->
+<!-- 17 · Part: the 1.1 mm -->
 <section class="slide draft part" data-sec="3" data-notes="Why does the bonding have to change at all? Because of the stack. To fit eight ASICs on a head, the ASIC boards sit one above the other, 1.5 millimetres apart, joined by the same connector everywhere. The parts on the board above hang into that gap, so what is left above each ASIC board is about 1.1 millimetres. Today's build, with the ribbon, stands about 2.8. It does not fit. So the build has to change, and that is the proposal on the next slide.">
   <p class="chain"><span>Probe</span><b>Bond</b><span>ASIC</span><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>Why the bond has to change: 1.1 mm</h1>
@@ -187,7 +196,7 @@
   <p class="nums">Boards 0.8 mm thick · 1.5 mm to the next board · 1.1 mm left above each ASIC board · today's build stands about 2.8 mm</p>
 </section>
 
-<!-- 17 · Proposal -->
+<!-- 18 · Proposal -->
 <section class="slide draft" data-sec="3" data-notes="The 4K stack leaves only about 1.1 millimetres above each ASIC board. Today's build stands about 2.8. So the proposal is to put the probe directly on the ASIC: three wire-bonder passes instead of five, and it fits.">
   <h1>Proposal: probe directly on the ASIC</h1>
   <div class="fill duo">
@@ -196,7 +205,7 @@
   </div>
 </section>
 
-<!-- 18 · Part: ASIC board -->
+<!-- 19 · Part: ASIC board -->
 <section class="slide draft part" data-sec="3" data-notes="The ASIC board carries two ASICs. Four of these boards make a head: a bottom and a top board on each side. Two decisions here. First, the top and bottom boards share one layer stack, so they are made the same way. Second, the bottom board passes every supply rail straight up to the top board, so one port below feeds four ASICs. It is ten layers in 0.8 millimetres, which is at the edge of what the factory will do; they have not confirmed it yet. This board is designed and on hold, not ordered. [Howard: say why it is on hold.] [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: V15 · 2 ASICs per board · 10 layers in 0.8 mm · 22.5 × 17.1 mm · designed, on hold, not ordered.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><b>ASIC board</b><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>The ASIC board</h1>
@@ -211,7 +220,7 @@
   </div>
 </section>
 
-<!-- 19 · Part: power board -->
+<!-- 20 · Part: power board -->
 <section class="slide draft part" data-sec="3" data-notes="The power board, which we call the FPGA-LDO board. It takes 3.3 volts and makes the seven quiet supplies the ASICs need, plus plus and minus 8 volts for stimulation. Analog and digital ground meet at a single point. It sits in the middle of the head with two identical ports, one up and one down, each feeding four ASICs. We looked at two layouts. Option B split this into two smaller boards and was two grams lighter, but it needed at least 132 contacts through one connector and the connector family stops at 120. So Option A it is, and B was archived on 14 November. [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: FPGA-LDO, Option A · layout V24 · 6 layers · 22.6 × 36.8 mm · two 80-pin ports · at the factory for review, not paid.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><span>ASIC board</span><b>Power board</b><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>The power board</h1>
@@ -226,7 +235,7 @@
   </div>
 </section>
 
-<!-- 20 · Part: frontend FPGA -->
+<!-- 21 · Part: frontend FPGA -->
 <section class="slide draft part" data-sec="3" data-notes="The frontend FPGA board. Each ASIC puts out eight data lines at 32 megahertz, so a head has sixty-four. An Artix-7 on the head captures all of them and sends them out as one serial lane at 3.125 gigabits per second. That is what lets a whole head leave on a single cable. It is fourteen layers on a board about 23 by 25 millimetres. The firmware has not been built yet: the design tools have never been run on it. [Howard: confirm the reason for putting the FPGA on the head.] [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: V14 · Artix-7 (XC7A35T) · 14 layers · 22.6 × 25.5 mm · one lane at 3.125 Gb/s · at the factory for review, not paid.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><span>ASIC board</span><span>Power board</span><b>Frontend FPGA</b><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>The frontend FPGA board</h1>
@@ -241,7 +250,7 @@
   </div>
 </section>
 
-<!-- 21 · Part: the head -->
+<!-- 22 · Part: the head -->
 <section class="slide draft part" data-sec="3" data-notes="Put together, that is one head: the frontend FPGA board on top, the power board under it, and two pairs of ASIC boards, one pair above and one below. Every joint between boards is the same connector at the same 1.5 millimetre height. The whole stack is about 23 by 47 by 14 millimetres, and we estimate 8 to 10 grams. One thing still open: the connectors are not keyed, so an ASIC board can be plugged in turned around. That is on the list at the end.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><b>ASIC board</b><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><span>PC</span></p>
   <h1>One head: eight ASICs in 23 × 47 × 14 mm</h1>
@@ -249,7 +258,7 @@
   <p class="nums">22.64 × 47.05 × 13.71 mm · 8 to 10 g, estimated · every board-to-board joint is the same connector (Hirose DF40C, 1.5 mm)</p>
 </section>
 
-<!-- 22 · Part: cable -->
+<!-- 23 · Part: cable -->
 <section class="slide draft part" data-sec="3" data-notes="The cable. Each head connects with one ordinary Micro-HDMI cable, about a metre long. We use its wire pairs our own way: one pair carries the recording lane up, one carries a 32 megahertz clock down, one carries commands, and one pin carries all of the head&#x27;s power at 5 volts. Because every head gets the same clock from the host, all sixty-four ASICs sample at the same instant. One detail to check: the plug has to be under 12.5 millimetres wide and the cable we picked is listed at 12.7. [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: Micro-HDMI to Micro-HDMI, 3 ft · chosen 16 Nov, not bought yet.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><b>Cable</b><span>Host board</span><span>PC</span></p>
   <h1>The cable</h1>
@@ -264,7 +273,7 @@
   </div>
 </section>
 
-<!-- 23 · Part: host board -->
+<!-- 24 · Part: host board -->
 <section class="slide draft part" data-sec="3" data-notes="The host board, which we call the HDMI Extension Board. It has eight Micro-HDMI ports, makes 5 volts for the heads with a current limit on each port, sends each port its clock, and carries the FPGA module. Two decisions matter here. It has had eight ports from the very first version, although one head needs one. So going to 32K does not touch this board. And we did not invent its shape or its link to the PC: both are copied from the reference board that the module maker publishes. This is the board that went from version 14 to version 40 in twenty days. [Two more presses on this slide: the decision, then what happens at 32K.] Numbers, if asked: HDMI Extension Board V40 · 8 ports · 6 layers · 168 × 114 mm · 5 V at 6 A, each port current-limited · PCI Express × 4 · at the factory for review, not paid.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><b>Host board</b><span>PC</span></p>
   <h1>The host board</h1>
@@ -279,7 +288,7 @@
   </div>
 </section>
 
-<!-- 24 · Part: numbers to the PC -->
+<!-- 25 · Part: numbers to the PC -->
 <section class="slide draft part" data-sec="3" data-notes="At the far end is a bought FPGA module, an Opal Kelly XEM8310, and the PC. The numbers: one head is 1.5 gigabits per second of recording data. Its lane runs at 3.125. One head fits through USB 3. Eight heads are 12.3 gigabits per second, and that needs PCI Express, four lanes at generation 3, which the host board already has. One honest caveat: a review found that the raw capture format as written needs 2.56 gigabits per head, slightly more than the lane's 2.5 of payload. That has to be settled in the firmware.">
   <p class="chain"><span>Probe</span><span>Bond</span><span>ASIC</span><span>ASIC board</span><span>Power board</span><span>Frontend FPGA</span><span>Cable</span><span>Host board</span><b>PC</b></p>
   <h1>To the computer: the numbers</h1>
@@ -291,7 +300,7 @@
   <p class="nums">FPGA module: Opal Kelly XEM8310, bought · one head fits through USB 3 · eight heads need PCI Express × 4, generation 3, which the host board already has</p>
 </section>
 
-<!-- 25 · KiCad -->
+<!-- 26 · KiCad -->
 <section class="slide draft" data-sec="3" data-notes="The boards as laid out in KiCad; the viewer reads the real board files, so you can zoom and switch layers. HDMI Extension: eight Micro-HDMI ports and a PCI Express edge. Frontend FPGA: an Artix-7 on fourteen layers, small enough to sit on the head. FPGA-LDO: the clean supplies for the ASICs. All pass design-rule checks with zero errors, order files are made, nothing is ordered yet.">
   <div class="row"><h1>The boards</h1>
     <div class="seg switch"><button data-view="lv-hdmi" aria-selected="true">HDMI Extension</button><button data-view="lv-frontend" aria-selected="false">Frontend FPGA</button><button data-view="lv-ldo" aria-selected="false">FPGA-LDO</button></div></div>
@@ -302,7 +311,7 @@
   </div>
 </section>
 
-<!-- 26 · Test frames -->
+<!-- 27 · Test frames -->
 <section class="slide draft" data-sec="3" data-notes="Rule four in practice. Each board comes back from the factory inside a break-off frame, 70 by 70 millimetres, with a header and test points, so it can be powered and probed on the bench on its own before it goes into a stack. Our professor asked for this, after the test board of the Open Ephys ONIX system. The frame does a second job: it is the panel the factory needs to assemble such a small board. On the right are the test points on the host board. Click a picture to zoom.">
   <h1>Every board can be tested alone</h1>
   <div class="fill shots three">
@@ -312,13 +321,13 @@
   </div>
 </section>
 
-<!-- 27 · Software -->
+<!-- 28 · Software -->
 <section class="slide draft" data-sec="3" data-notes="The software that runs the chip: it records all 512 channels, programs the stimulators, and can do both together. This is a real recording from this week, drawn in the layout of the chip; red frames are stimulator channels.">
   <h1>All 512 channels, live</h1>
   <div class="fill shots"><figure><img data-zoom src="assets/software/lab_tools_map_real_recording.png" alt="A real recording shown as a map of all 512 channels"></figure></div>
 </section>
 
-<!-- 28 · Status -->
+<!-- 29 · Status -->
 <section class="slide draft" data-sec="4" data-notes="Where it all stands today, plainly. The chip, the probe and the 512-channel setup work, and the software made its first recording from the real chip this month. The three new boards, the host, the frontend and the power board, were submitted to the factory on 22 November as bare boards and are under review; they are not paid for yet. The ASIC board is designed and on hold. The FPGA module is bought, the cable is chosen. Nothing of the 4K system has been tested, because nothing of it exists yet. That is the honest state: the design is done, and the building starts now.">
   <h1>Where it stands today</h1>
   <table class="state">
@@ -333,7 +342,7 @@
   </table>
 </section>
 
-<!-- 29 · What carries forward -->
+<!-- 30 · What carries forward -->
 <section class="slide draft" data-sec="4" data-notes="[Three columns arrive one at a time: 512, then 4K, then 32K.] This is the same system, sorted by one question: at each generation, what was new work and what was reused as it is? A blue dot is new work. An open circle is reused. The ASIC was the work of the 512 generation, and it is reused eight times in a head and 64 times at 32K. The head boards and the host board were the work of this semester, and the host board already has eight ports, so 32K reuses both. One row is different. Putting the probe onto the chip is done again by hand, every time: once, then eight times, then 64 times. That row is the one that does not carry forward. [Howard: check every cell of this table; it is my reading of the system.]">
   <h1>What carries forward, and what does not</h1>
   <div class="fill carrywrap">
@@ -343,7 +352,7 @@
   <p class="nums"><i class="k new"></i>new work <i class="k same"></i>reused as it is <i class="k hand"></i>done again by hand, every time</p>
 </section>
 
-<!-- 30 · The slowest loop (three steps) -->
+<!-- 31 · The slowest loop (three steps) -->
 <section class="slide draft" data-sec="4" data-notes="So what sets how long a step takes? Its slowest loop. Design: with AI, the HDMI board went through 26 versions in 20 days, about a day per turn. [next] Fabrication: about three weeks a turn. [next] Bonding: two months, by hand, and not fully solved. It took me, Weinan and Pablo a long time, and the manufacturer's engineer too. Design is no longer the bottleneck. The loop done by hand is, and it is also the one row that did not carry forward. So this is where the next step of times eight will be won or lost: make bonding a loop that turns in days, or remove it with the direct-on-ASIC build.">
   <h1>The slowest loop sets the pace of a step</h1>
   <div class="fill frames" data-steps>
@@ -353,7 +362,7 @@
   </div>
 </section>
 
-<!-- 31 · What is still open -->
+<!-- 32 · What is still open -->
 <section class="slide draft" data-sec="4" data-notes="And what is still open. I would rather show you this list than have you find it. How the probe attaches in the new build is not decided: we have to hold it flat and release it from its wafer piece, and the pad rows on the probe and the chip do not line up yet, 409 micrometres against 720. The firmware has never been built. The head-to-host link has almost no margin with the capture format as written. The head will run warm; the estimate is 14 to 62 degrees above ambient depending on assumptions, which is too wide to trust. The connectors are not keyed. And two things wait on the factories: ten layers in 0.8 millimetres, and copper across the break-off tabs. Each of these is a loop to turn, and most of them live in files.">
   <h1>What is still open</h1>
   <ol class="rules open">
@@ -366,7 +375,7 @@
   </ol>
 </section>
 
-<!-- 32 · Close -->
+<!-- 33 · Close -->
 <section class="slide draft closing" data-sec="4" data-notes="So, back to the question from the start. From one head to every neuron is eight steps of times eight. At the pace of history they take two centuries. They only fit in our lifetimes if each one is faster than the last, and that means two things for how we work: build every generation so the next one can reuse it, and go after the slowest loop, which today is the one done by hand. 4K to 32K is the first step, and it is designed. Thank you.">
   <div class="mid">
     <p class="dateline">From one head to every neuron</p>
@@ -377,7 +386,7 @@
   <p class="credit">Drawing: Santiago Ramón y Cajal · scan: Wellcome Collection, CC BY 4.0</p>
 </section>
 
-<!-- 33 · Backup divider -->
+<!-- 34 · Backup divider -->
 <section class="slide" data-backup-start data-sec="0" data-notes="End of the talk. Everything after this slide is backup: the slides from the earlier, longer version, kept for questions.">
   <div class="mid">
     <p class="dateline">End of the talk</p>
@@ -385,7 +394,7 @@
   </div>
 </section>
 
-<!-- 34 · Roadmap (backup) -->
+<!-- 35 · Roadmap (backup) -->
 <section class="slide" data-sec="0" data-notes="The roadmap. First the goal: what neural engineering is trying to do, stated as a number, and why it matters beyond medicine. Second, what it takes: how far along we are, and the list of problems a 2019 paper says must be solved. Third the 4K system, what we built this semester. Fourth, going faster with AI: that 2019 list again, sorted by what AI can see and what it cannot.">
   <h1>Roadmap</h1>
   <ol class="road">
@@ -396,7 +405,7 @@
   </ol>
 </section>
 
-<!-- 35 · The elephant (backup) -->
+<!-- 36 · The elephant (backup) -->
 <section class="slide" data-sec="0" data-notes="Before the goal, the elephant in the room. On 20 November a mathematician working with an AI model posted a proof of the Riemann hypothesis, written in the Lean proof language. It compiles, and the proof checker accepts it. Experts are still confirming that the formal statement really is the Riemann hypothesis. So: claimed and machine-checked, not yet accepted. Either way, the question for us is the same. If a machine can do that, what is left for people trying to move a field forward? Hold the question. The last part of the talk is my answer.">
   <div class="mid">
     <p class="dateline">20 Nov 2026 · An AI-written proof of the Riemann hypothesis is posted. It compiles. Experts are checking it.</p>
@@ -404,78 +413,78 @@
   </div>
 </section>
 
-<!-- 36 · The unit (backup) -->
+<!-- 37 · The unit (backup) -->
 <section class="slide" data-sec="0" data-notes="What are we trying to solve. You can study the brain at three levels. Behaviour: one person, seen from the outside; that is psychology. Regions: imaging like fMRI, where each point averages about a million neurons. And cells: one neuron, one spike. We want the cellular level. That is what makes it neuroscience.">
   <h1>The unit is the neuron</h1>
   <div class="fill"><img class="plot" src="assets/plots/levels.svg?v=9" alt="Three levels: behaviour, one person; regions, about a million neurons per point; cells, one neuron"></div>
 </section>
 
-<!-- 37 · The 2019 paper (backup) -->
+<!-- 38 · The 2019 paper (backup) -->
 <section class="slide" data-sec="0" data-notes="We are not the first to ask. In 2019 eight people, among them Lan Luan and Chong Xie, asked in Neuron whether one can record spikes from every neuron in a mammalian brain. Their answer: physics allows it, for the cortex of a mouse. This is their design, seen from above and drawn to scale. Each blue dot is a shank six micrometres across, one every forty micrometres, and each shank hears the neurons within twenty micrometres of it. A shank carries 280 electrodes. That is twenty million channels for one mouse cortex, and it displaces about two percent of the tissue. For scale, the red outline is one Neuropixels shank today. Two things they did not cover: the human brain, and stimulation. And they wrote it before AI could help. Keep that in mind.">
   <h1>2019: can we record from every neuron? Physics says yes.</h1>
   <div class="fill"><img class="plot" src="assets/plots/design2019.svg?v=8" alt="The 2019 design seen from above, to scale: shanks 6 micrometres across on a lattice 40 micrometres apart among the neurons, with one Neuropixels shank for comparison. 40 micrometres between shanks, 280 electrodes on each shank, 20 million channels for one mouse cortex, 2 percent of the tissue displaced."></div>
   <p class="foot-note">Kleinfeld, Luan, Mitra, Robinson, Sarpeshkar, Shepard, Xie, Harris · Neuron 103, 1005 (2019) · mouse cortex, recording only · neuron bodies drawn 10 µm across for illustration</p>
 </section>
 
-<!-- 38 · Subfield (backup) -->
+<!-- 39 · Subfield (backup) -->
 <section class="slide" data-sec="0" data-notes="This is why I say neuroscience is a subfield of neuroengineering, and not the other way round. Once we can record and stimulate every neuron, any experiment is a click of a button: choose which neurons to read, which to write, and when. All of neuroscience becomes a choice inside that capability. So the engineering problem contains the science.">
   <h1>Neuroscience is a subfield of neuroengineering</h1>
   <div class="fill"><img class="plot" src="assets/plots/subfield.svg?v=9" alt="A large circle, neuroengineering: read and write every neuron. Inside it a smaller circle, neuroscience: choose which ones and when. Then every experiment is a click."></div>
 </section>
 
-<!-- 39 · Who is it for (backup) -->
+<!-- 40 · Who is it for (backup) -->
 <section class="slide" data-sec="0" data-notes="Why does this matter outside the clinic? Today a brain interface means medicine, and that is the right place to start. Each dot here is eight million people. The red dots are everyone living with a spinal cord injury, about 15 million, and everyone who is blind, about 43 million: the people today's implants are built for first. Other conditions add more dots, but the picture does not change. The grey dots are everyone else. An interface that reads and writes every neuron is not only a treatment. It is for all of these dots.">
   <h1>Beyond medicine: who is it for?</h1>
   <div class="fill"><img class="plot" src="assets/plots/people.svg?v=7" alt="One thousand dots, each 8 million people. Seven are red: spinal cord injury and blindness, 58 million people. All one thousand: everyone, 8.2 billion."></div>
   <p class="foot-note">Spinal cord injury: 15.4 million (WHO, 2021) · blindness: 43 million (Bourne et al., Lancet Global Health, 2020) · world population: 8.2 billion</p>
 </section>
 
-<!-- 40 · Ten bits per second (backup) -->
+<!-- 41 · Ten bits per second (backup) -->
 <section class="slide" data-sec="0" data-notes="And this is what everyone is missing. Our senses gather about a billion bits every second. Everything we put out, typing, speaking, moving, runs at about ten bits per second. That is a factor of a hundred million, and it is the same for every healthy person: it is the speed limit on how we work with each other and with machines. The blue bar is one of our 4K heads: 1.5 billion bits per second of raw data, measured directly from the brain. Raw samples are not the same thing as information, so this is capacity, not meaning. But the wire is already wide enough. What is missing is the neurons on the other end of it.">
   <h1>We take in a billion bits a second. We put out ten.</h1>
   <div class="fill"><img class="plot" src="assets/plots/bits.svg?v=8" alt="Information rate on a logarithmic scale. In, what the senses gather: 1 billion bits per second. Out, typing, speaking, moving: 10 bits per second, a gap of one hundred million times. One 4K head, raw data: 1.5 billion bits per second."></div>
   <p class="foot-note">In and out: Zheng and Meister, Neuron, 2025 · one head: 4,096 channels at 31.25 kS/s, 12 bit</p>
 </section>
 
-<!-- 41 · Ceilings (backup) -->
+<!-- 42 · Ceilings (backup) -->
 <section class="slide" data-sec="0" data-notes="That straight line is not one technology. Each kind of probe climbs and then runs out. Stiff arrays as they are today first: the Utah array with 96 channels, then Neuropixels with 384 per probe; with several probes together they reached about two thousand channels, because thick shanks damage tissue when they are packed closely. Flexible threads are our work, the NET probes: we are at 4K, 32K is next, and my estimate is they run out around a hundred thousand channels. Beyond that we need a new kind of probe. The 2019 paper drew one: twenty million channels for a mouse cortex. Nobody has built it, and I do not know yet how it will be made. But there has been a next one every time, and there will be again. These ceilings are our estimates.">
   <h1>Each probe technology has a ceiling</h1>
   <div class="fill"><img class="plot" src="assets/plots/ceilings.svg?v=11" alt="Three S-curves on a logarithmic scale: stiff arrays today (Utah array 96, Neuropixels 384) level off near 2,000 channels, flexible threads (NET probes, our work) near 100,000, and a next probe, drawn in 2019 at 20 million channels and not built, reaches 86 billion"></div>
 </section>
 
-<!-- 42 · The 2019 list (backup) -->
+<!-- 43 · The 2019 list (backup) -->
 <section class="slide" data-sec="0" data-notes="The same paper wrote down what has to be solved. Eight things. Probes: six-micrometre shanks with wires 35 nanometres wide. Power: 0.2 microwatts per channel. Data: find the spikes at the probe, before sending anything. Spike sorting, for twenty million channels. Insertion: a shank every forty micrometres, a tenth of the spacing of a Utah array. Assembly: electronics at the head of every shank. Tissue: nobody knows whether cortex tolerates losing two percent of its volume. And lifetime: electrode coatings degrade over months. I will take two of them now, data and power, and come back to the whole list at the end.">
   <h1>The 2019 list: what must be solved</h1>
   <div class="fill"><img class="plot" src="assets/plots/list2019.svg?v=7" alt="Eight problems from the 2019 paper: probes, power, data, spike sorting, insertion, assembly, tissue, lifetime. Written before AI could help."></div>
 </section>
 
-<!-- 43 · Bandwidth (backup) -->
+<!-- 44 · Bandwidth (backup) -->
 <section class="slide" data-sec="0" data-notes="Can the data even be carried? Each channel is 31.25 kilosamples per second at 12 bits. One head is 192 megabytes per second. Every neuron in a human brain, raw, is about 4 petabytes per second. Compare that with the GPU NVIDIA is shipping now, the Rubin: the chip that trains and runs the large AI models, sold 72 to a rack. Its memory bandwidth, how fast it reads its own 288 gigabytes of memory, is 19.2 terabytes per second: raw, every neuron is about 210 of those, three racks. If the chip sends only spikes, it is about 2 terabytes per second, a tenth of one GPU. So bandwidth is not what stops us. The probes are.">
   <h1>Can we carry the data?</h1>
   <div class="fill"><img class="plot" src="assets/plots/bandwidth.svg?v=9" alt="Data rates on a logarithmic scale, from one channel at 47 kB/s to every neuron raw at 4 PB/s, against one NVIDIA Rubin GPU at 19.2 TB/s and one Vera Rubin rack of 72 GPUs at 1.4 PB/s"></div>
   <p class="foot-note">31.25 kS/s, 12 bit per channel · spikes only: 5 spikes/s per neuron, 5 bytes each · NVIDIA Rubin (2026): 288 GB of HBM4 memory per GPU; NVIDIA lists 19.2 or 22 TB/s, the lower is used</p>
 </section>
 
-<!-- 44 · Twenty watts (backup) -->
+<!-- 45 · Twenty watts (backup) -->
 <section class="slide" data-sec="0" data-notes="Power is the hard one, and it splits in two. Computing, on the left. The brain runs on about 20 watts. A Raspberry Pi 5, an 80 dollar computer, runs Gemma 3 with one billion parameters, a small language model from Google, at ten to fifteen words a second on about 9 watts. So a useful AI model already fits inside the brain's power budget; it does not need the 2,000 watt GPU, and that 2,000 is from industry reports, not from NVIDIA. Recording, on the right. The brain spends about a quarter of a nanowatt per neuron: 20 watts over 86 billion. The 2019 paper needs less than 0.2 microwatts per channel, so that the electronics do not heat the brain. That is already about 900 times the brain's own figure. And the amplifier the paper cites is at 7.6 microwatts, 38 times too much. So computing fits in 20 watts. Recording does not yet.">
   <h1>20 watts is enough to compute. Not yet to record.</h1>
   <div class="fill"><img class="plot" src="assets/plots/power.svg?v=10" alt="Two bar charts on logarithmic scales. Computing, the whole system: Raspberry Pi 5 running Gemma 3 at 9 watts, the human brain at 20 watts, one NVIDIA Rubin GPU at 2,000 watts. Recording, each neuron or channel: the brain at 0.23 nanowatts per neuron, the 2019 target of 0.2 microwatts per channel, about 900 times more, and a published amplifier at 7.6 microwatts per channel, 38 times more again."></div>
   <p class="foot-note">Brain: about 20% of a 100 W resting body, and 20 W ÷ 86 billion per neuron · Raspberry Pi 5: 8 to 10 W, published benchmarks · Rubin GPU: 1,800 to 2,300 W, as reported · target and amplifier: Kleinfeld et al., Neuron 2019</p>
 </section>
 
-<!-- 45 · Sound (backup) -->
+<!-- 46 · Sound (backup) -->
 <section class="slide" data-sec="0" data-notes="The first experiment the chip is headed for: tone pips to a sedated sheep, recording auditory cortex. To trust that, you have to trust the sound. The delay from playback to microphone is 38.3 milliseconds and stays within about a hundredth of a millisecond. Bench only so far; not yet on an animal.">
   <h1>First experiment: sound timing, 38.3 ms</h1>
   <div class="fill shots"><figure><img data-zoom src="assets/sonic/timing_summary.png" alt="Sound delay over 20 probes in two runs: 38.250 ms and 38.375 ms, flat"></figure></div>
 </section>
 
-<!-- 46 · Two kinds of problems (backup) -->
+<!-- 47 · Two kinds of problems (backup) -->
 <section class="slide" data-sec="0" data-notes="Now, going faster. There are two kinds of problems today. The first kind AI has changed completely. I can work with AI for two hours and have a working prototype that would have taken a full PhD, five years, not long ago. The second kind has not moved at all. Wire bonding: there is not much intelligence in it, not much thinking. But it is hard. It took me a long time, it took Weinan a long time, it took Pablo a long time, I consulted the manufacturer's engineer, and it is still not fully solved. Two months, and still two months. The frontier is jagged, and everyone has to face that.">
   <h1>Two kinds of problems</h1>
   <div class="fill"><img class="plot" src="assets/plots/jagged.svg?v=8" alt="Time to solve, before and with AI. A working prototype: five years to two hours. Wire bonding: two months, still two months."></div>
 </section>
 
-<!-- 47 · The bonder (backup) -->
+<!-- 48 · The bonder (backup) -->
 <section class="slide" data-sec="0" data-notes="This is the second kind. Small balls, crushed wire ends, no ball at all. Each failure has more than one cause, and you find them by hand, one at a time, at the machine. Click to zoom.">
   <h1>Not much thinking. Still two months.</h1>
   <div class="fill shots four">
@@ -486,32 +495,32 @@
   </div>
 </section>
 
-<!-- 48 · Can AI see the loop (backup) -->
+<!-- 49 · Can AI see the loop (backup) -->
 <section class="slide" data-sec="0" data-notes="Why is one fast and the other slow? It is not difficulty. It is whether AI can see the loop. Board design lives entirely in files: design, check, fix. AI sees every step and can act on every step, so the loop turns in hours. Wire bonding lives in hands and eyes: set the machine, bond, look through the microscope. AI sees none of it. So the way to position ourselves is to make the bench visible: log every bond with its settings, a picture and the result; use fixtures so every run is the same; and have an automatic pass or fail. Then when a smarter AI arrives, we can point it at the bonder, and a two-month problem becomes an afternoon problem.">
   <h1>The difference: can AI see the loop?</h1>
   <div class="fill"><img class="plot" src="assets/plots/two_loops.svg?v=8" alt="Two loops. Board design: design, check, fix, all in files, AI sees every step, turns in hours. Wire bonding: set, bond, look, in hands and eyes, AI sees nothing, turns in days. To fix it: log every bond, repeatable fixtures, automatic pass or fail."></div>
 </section>
 
-<!-- 49 · The list, sorted (backup) -->
+<!-- 50 · The list, sorted (backup) -->
 <section class="slide" data-sec="0" data-notes="Now take the 2019 list and sort it by that one question: can AI see the loop? In files: power, which is circuit design; data; and spike sorting. These are design problems, and our boards show what happens to design problems now: 26 versions in 20 days. In hands: making the probes, inserting them, and assembling them. That is where our bonding sits: two months. On biology's clock: whether tissue tolerates it, and how long probes last. A chronic study takes months, whatever AI does. This sorting is our judgment, not a result. But it tells us where to work: the middle column is the one we can move into the first.">
   <h1>The same list, sorted by what AI can see</h1>
   <div class="fill"><img class="plot" src="assets/plots/sorted2019.svg?v=7" alt="The eight problems sorted into three columns. In files, AI sees every step: power, data, spike sorting. In hands, AI sees nothing yet: probes, insertion, assembly. On biology's clock, AI cannot shorten it: tissue, lifetime."></div>
   <p class="foot-note">The sorting is our judgment, not a result</p>
 </section>
 
-<!-- 50 · Ladder · static version (backup) -->
+<!-- 51 · Ladder · static version (backup) -->
 <section class="slide" data-sec="0" data-notes="What we built. One ASIC has 512 recording and 128 stimulation channels; that works on the bench today. One head is a stack of boards carrying eight ASICs: 4,096 recording, 1,024 stimulation. That is the 4K system, designed this semester. Eight heads on one host board is 32,768 recording and 8,192 stimulation channels.">
   <h1>From one chip to 32,768 channels</h1>
   <div class="fill"><img class="plot" src="assets/plots/chips.svg?v=11" alt="Drawn to scale. One ASIC, 512 channels, working. Times eight: one head of eight ASICs, 4,096 channels, designed. Times eight: eight heads, 64 ASICs, 32,768 channels, next; one of the eight heads is filled in, the one designed."></div>
 </section>
 
-<!-- 51 · Slowest loop · static version (backup) -->
+<!-- 52 · Slowest loop · static version (backup) -->
 <section class="slide" data-sec="0" data-notes="So what sets the slope of that curve from earlier? How fast we iterate: 4K to 32K, 32K to 100K, and beyond. And our iteration is three loops. Design: with AI, the HDMI board went through 26 versions in 20 days, about a day per turn. Fabrication: weeks; the first board went out at the end of October and is not back yet. Bonding: two months. If you want a hundred or a thousand times the productivity, design is no longer the bottleneck. The bottleneck is atoms, and checking that what AI produced is right. The slowest loop sets the slope.">
   <h1>The slowest loop sets the slope</h1>
   <div class="fill"><img class="plot" src="assets/plots/loops.svg?v=8" alt="Days for one turn of each loop: design 1 day, fabrication about 3 weeks, bonding 2 months"></div>
 </section>
 
-<!-- 52 · The number (backup) -->
+<!-- 53 · The number (backup) -->
 <section class="slide" data-sec="0" data-notes="For a human brain, every neuron is this number: about 86 billion. That is what done looks like. Most fields cannot say what done looks like. We can.">
   <div class="mid">
     <p class="huge">86,000,000,000</p>
@@ -519,7 +528,7 @@
   </div>
 </section>
 
-<!-- 53 · Principle (backup) -->
+<!-- 54 · Principle (backup) -->
 <section class="slide" data-sec="0" data-notes="So how do we make each step faster than the last, and how do we make AI work for neuroengineering? Our answer is one principle. Make every part reusable. If the work of this step is still working at the next step, the next step starts ahead. If it has to be redone, we are back on the straight line. Everything I show you about the system is this principle applied to one part at a time.">
   <div class="mid">
     <p class="dateline">How each step gets faster</p>
